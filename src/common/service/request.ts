@@ -172,28 +172,27 @@ const http = {
     params.config && Object.assign(params, params.config);
     return params;
   },
-  get: (params: RequestParams) => {
-    if (!params.config || params.config.isLoading !== false) {
-      //   showLoading();
-    }
-    params = http.getConfig({
-      method: "get",
+  // 封装不同请求类型而获取config的快捷方法
+  handleGetConfig: (method: Method, params: RequestParams) => {
+    return http.getConfig({
+      method,
       url: params.url,
       data: requestSign(process.env.REACT_APP_SECRET, params.url, params.data),
       config: params.config,
     });
+  },
+  get: (params: RequestParams) => {
+    if (!params.config || params.config.isLoading !== false) {
+      //   showLoading();
+    }
+    params = http.handleGetConfig("get", params);
     return http.request(params, params.config);
   },
   post: (params: RequestParams) => {
     if (!params.config || params.config.isLoading !== false) {
       //   showLoading();
     }
-    params = http.getConfig({
-      method: "post",
-      url: params.url,
-      data: requestSign(process.env.REACT_APP_SECRET, params.url, params.data),
-      config: params.config,
-    });
+    params = http.handleGetConfig("post", params);
     return http.request(params, params.config);
   },
 };
