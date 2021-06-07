@@ -7,7 +7,6 @@
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { ref } from "@vue/reactivity";
-
 const msg = ref<string>("hello, ziggurat");
 </script>
 <style lang="scss" scoped>
