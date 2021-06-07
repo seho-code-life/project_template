@@ -1,0 +1,26 @@
+{
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.5",
+    "js-cookie": "^2.2.1",
+    "sass": "^1.32.8",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.8",
+    "vuex": "^4.0.1",
+    "zigg-request-sign": "^1.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "^3.0.5",
+    "typescript": "^4.1.3",
+    "vite": "^2.3.5",
+    "vite-plugin-pwa": "^0.7.3",
+    "vue-tsc": "^0.0.24"
+  }
+}
