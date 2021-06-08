@@ -10,6 +10,7 @@
     "dayjs": "^1.10.5",
     "js-cookie": "^2.2.1",
     "sass": "^1.32.8",
+    "vite-plugin-compression": "^0.2.5",
     "vue": "^3.0.5",
     "vue-router": "^4.0.8",
     "vuex": "^4.0.1",
