@@ -1,7 +1,7 @@
 <template>
   <div class="index-box">
     {{ msg }}
-    <p class="date">{{dayjs(Date.now()).format("YYYY-MM-DD HH:mm")}}</p>
+    <p class="date">{{ dayjs(Date.now()).format("YYYY-MM-DD HH:mm") }}</p>
   </div>
 </template>
 <script lang="ts" setup>
@@ -15,7 +15,7 @@ const msg = ref<string>("hello, ziggurat");
   margin-top: 30vh;
   font-weight: bold;
   font-size: 30px;
-  .date{
+  .date {
     font-size: 15px;
   }
 }

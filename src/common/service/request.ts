@@ -3,19 +3,60 @@ import axios, { AxiosRequestConfig, Method } from "axios";
 import Cookie from "js-cookie";
 // @ts-ignore
 import requestSign from "zigg-request-sign";
-const BASE_URL = process.env.REACT_APP_ADMIN_API + "/v1";
+const { VITE_APP_ADMIN_API, VITE_APP_SECRET } = import.meta.env;
+const BASE_URL = VITE_APP_ADMIN_API + "/v1";
 // const BASE_URL = 'http://192.168.2.36:9999/v1';
+
+// 请求参数类型约定
+type HttpParams = {
+  authApi?: boolean; // 是否私有
+} & AxiosRequestConfig;
+
+type HttpConfig = {
+  isLoading: boolean;
+};
+
+// 获取config方法的类型约定
+type ConfigParams = {
+  method: Method;
+  url: string;
+  data?: any;
+  params?: any;
+  config: any;
+};
 
 let defaultConfig = {
   baseURL: BASE_URL,
   timeout: 30000,
   headers: {
     Accept: "application/json",
-    // 'Authorization': '',
-    // 'locale': ''
   },
 };
+
+// 创建instance实例
 let instance = axios.create(defaultConfig);
+
+// 添加axios请求拦截器
+instance.interceptors.request.use(
+  (config: HttpParams): any => {
+    // 获取请求参数，不同请求类型参数key也不一样，在这里做一个处理
+    const params = config.method === "get" ? config.params : config.data;
+    // 判断post参数合法性
+    if (
+      !params ||
+      Object.prototype.toString.call(params) !== "[object Object]"
+    ) {
+      throw new Error("params is undefined or not an object");
+    }
+    // 如果当前config中存在authApi就设置私有接口Authorization，没传默认私有接口
+    if (config.authApi || typeof config.authApi === "undefined") {
+      // 从cookie中获取token
+      let token = Cookie.get("token");
+      config.headers["Authorization"] = "Bearer " + token;
+    }
+    return config;
+  }
+);
 
 let requestCount = 0;
 
@@ -82,52 +123,16 @@ function handleError(error: any, vc: any) {
   }
 }
 
-// 请求参数类型约定
-type HttpParams = {
-  authApi?: boolean; // 是否私有
-} & AxiosRequestConfig;
 
-type HttpConfig = {
-  isLoading: boolean;
-};
-
-// 获取config方法的类型约定
-type ConfigParams = {
-  method: Method;
-  url: string;
-  data?: any;
-  params?: any;
-  config: any;
-};
-
-// get/post接口的参数
-type RequestParams = {
-  url: string;
-  data: any;
-  config: any;
-};
-const http = {
+var http = {
   getBaseURL: () => {
     return defaultConfig.baseURL;
   },
   request: (params: HttpParams, config: HttpConfig) => {
-    if (
-      !params ||
-      Object.prototype.toString.call(params) !== "[object Object]"
-    ) {
-      throw new Error("params is undefined or not an object");
-    }
-    //设置私有接口Authorization
-    if (params.authApi) {
-      let token = Cookie.get("token");
-      instance.defaults.headers.common["Authorization"] = "Bearer " + token;
-    } else {
-      delete instance.defaults.headers.common["Authorization"];
-    }
-
+    // 对请求的参数做一个transform
     return new Promise((resolve, reject) => {
       instance
-        .request(params)
+        .request(http.transformParams(params))
         .then((res) => {
           if (!config || config.isLoading !== false) {
             // hideLoading();
@@ -156,44 +161,26 @@ const http = {
         });
     });
   },
-  getConfig: (params: ConfigParams & RequestParams): RequestParams => {
+  getConfig: (params: ConfigParams) => {
+    // 处理不同请求，请求体不一样的问题
+    let _data = params.data;
+    delete params.data;
     if (params.method === "get") {
-      params.data && (params.params = params.data);
+      _data && (params.params = _data);
     } else {
-      params.data && (params.data = params.data);
+      _data && (params.data = _data);
     }
-    //没有传递authApi参数都是私有接口
-    if (!params.config) {
-      params.config = {};
-      params.config.authApi = true;
-    }
-    if (params.config && !params.config.hasOwnProperty("authApi"))
-      params.config.authApi = true;
-    params.config && Object.assign(params, params.config);
     return params;
   },
-  // 封装不同请求类型而获取config的快捷方法
-  handleGetConfig: (method: Method, params: RequestParams) => {
+  // 转换参数
+  transformParams: (params: any) => {
+    // 判断请求的类型, 处理请求体
     return http.getConfig({
-      method,
+      method: params.method,
       url: params.url,
-      data: requestSign(process.env.REACT_APP_SECRET, params.url, params.data),
+      data: requestSign(VITE_APP_SECRET, params.url, params.data),
       config: params.config,
     });
-  },
-  get: (params: RequestParams) => {
-    if (!params.config || params.config.isLoading !== false) {
-      //   showLoading();
-    }
-    params = http.handleGetConfig("get", params);
-    return http.request(params, params.config);
-  },
-  post: (params: RequestParams) => {
-    if (!params.config || params.config.isLoading !== false) {
-      //   showLoading();
-    }
-    params = http.handleGetConfig("post", params);
-    return http.request(params, params.config);
   },
 };
 
