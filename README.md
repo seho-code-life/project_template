@@ -37,6 +37,24 @@ REACT_APP_SECRET=
 
 ## 请求
 请求使用了axios，包括内置了js-cookie的一些开发包。
+```js
+import http from "../../common/service/request"
+
+http
+  .request(
+    {
+      authApi: true,
+      url: "",
+      method: "post"
+    },
+    {
+      isLoading: true,
+    }
+  )
+  .then((res) => {
+    console.log(res);
+  });
+```
 
 ## css预编译工具
 使用sass，业务中如果有很多css复杂处理就需要一个sass工具包来解决，推荐下面这个包，采用的也是BEM规范。
