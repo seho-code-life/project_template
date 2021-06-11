@@ -17,9 +17,10 @@ export default defineConfig({
     viteCompression({
       verbose: true,
       algorithm: "gzip",
-      threshold: 10240
+      threshold: 10240,
     }),
     VitePWA({
+      registerType: 'autoUpdate',
       manifest: {
         name: "纸贵科技",
         short_name: "纸贵科技",
@@ -34,10 +35,7 @@ export default defineConfig({
         background_color: "#F9F9F9",
         theme_color: "#3A3F51",
       },
-      workbox: {
-        skipWaiting: true,
-        clientsClaim: true,
-      },
+      workbox: {},
     }),
     vue(),
   ],

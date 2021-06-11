@@ -2,11 +2,11 @@
   <router-view></router-view>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'App'
+<script lang="ts" setup>
+import { onMounted } from '@vue/runtime-core';
+import { registerSW } from 'virtual:pwa-register';
+onMounted(() => {
+  registerSW();
 })
 </script>
 
