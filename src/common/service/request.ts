@@ -36,7 +36,7 @@ const callBackByErrorCode: { [key: number]: (res: AxiosError) => void } = {
 };
 
 // 请求参数类型约定
-type HttpParams = {
+export type HttpParams = {
   authApi?: boolean; // 是否私有API(即登陆之后才可以访问的api)
 } & AxiosRequestConfig;
 
@@ -64,12 +64,6 @@ let instance = axios.create(defaultConfig);
 instance.interceptors.request.use((config: HttpParams): any => {
   // 全局的loading开始加载
   store.commit("setRequestLoading", true);
-  // 获取请求参数，不同请求类型参数key也不一样，在这里做一个处理
-  const params = config.method === "get" ? config.params : config.data;
-  // 判断post参数合法性
-  if (!params || Object.prototype.toString.call(params) !== "[object Object]") {
-    throw new Error("params is undefined or not an object");
-  }
   // 如果当前config中存在authApi就设置私有接口Authorization，没传默认私有接口
   if (config.authApi || typeof config.authApi === "undefined") {
     // 从cookie中获取token
@@ -154,7 +148,7 @@ class HttpService implements IRequestService {
       method: params.method,
       url: params.url,
       data: requestSign(VITE_APP_SECRET, params.url, params.data),
-      config: params.config,
+      ...params.config,
     });
   }
 }

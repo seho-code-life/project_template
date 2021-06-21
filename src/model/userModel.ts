@@ -1,4 +1,4 @@
-import BaseApi from "../model/common/basicApi";
+import BaseApi, { IBasicApi } from "../model/common/basicApi";
 
 // 用户状态，是否开启/注销
 export enum EStatus {
@@ -6,16 +6,18 @@ export enum EStatus {
   OPEN = 1
 }
 
-const getKeyValue = <T extends object, U extends keyof T>(obj: T) => (key: U) => obj[key];
+const getKeyValue = <T extends object, U extends keyof T>(obj: T) => (key: U) =>
+  obj[key];
 
 // 用户基类
-export default class UserModel extends BaseApi {
+export default class UserModel {
   constructor() {
-    super({
+    this.api = new BaseApi({
       version: "v1",
       moduleName: "user"
     });
   }
+  public api: IBasicApi;
   public id: number | undefined;
   public name: string = "";
   // 默认启用这个状态

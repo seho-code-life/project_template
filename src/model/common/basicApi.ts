@@ -1,15 +1,44 @@
-import HttpService from "../../common/service/request";
+import HttpService, { HttpParams } from "../../common/service/request";
 
 const http = new HttpService();
 
-interface IBasicApi {
+// 请求的其他选项
+type Options = {
+  headers?: any;
+  authApi?: boolean;
+};
+export interface IBasicApi {
   url: string;
-  create: (params: any) => Promise<ActionResult>;
-  deleteByID: (params: { id: string }) => Promise<ActionResult>;
-  update: (params: { id: string }) => Promise<ActionResult>;
-  read: () => Promise<ActionResult>;
-  readByID: (params: { id: string }) => Promise<ActionResult>;
+  // add
+  create: (params: { data: any; options?: Options }) => Promise<ActionResult>;
+  // delete
+  deleteByID: (params: {
+    data: { id: string };
+    options?: Options;
+  }) => Promise<ActionResult>;
+  // update
+  updateByID: (params: {
+    data: { id: string; [key: string]: any };
+    options?: Options;
+  }) => Promise<ActionResult>;
+  // read
+  read: (params: { options?: Options }) => Promise<ActionResult>;
+  // read
+  readByID: (params: {
+    data: { id: string };
+    options?: Options;
+  }) => Promise<ActionResult>;
 }
+
+// 混入options到请求体中
+const mixinOptionToHttpParams = (params: any, _data: any): HttpParams => {
+  return Object.assign(_data, {
+    config: {
+      headers: params.options?.headers,
+      authApi: params.options?.authApi,
+    },
+  });
+};
 
 export default class BasicApi implements IBasicApi {
   public url: string;
@@ -23,12 +52,17 @@ export default class BasicApi implements IBasicApi {
    * @description This code is completed by the generator (create)
    * @returns Data
    */
-  async create(params: any): Promise<ActionResult> {
-    return await http.request({
-      method: "POST",
-      url: this.url,
-      data: params,
-    });
+  async create(params: {
+    data: any;
+    options?: Options;
+  }): Promise<ActionResult> {
+    return await http.request(
+      mixinOptionToHttpParams(params, {
+        method: "POST",
+        url: this.url,
+        data: params.data,
+      })
+    );
   }
   /**
    * @name 删除指定资源
@@ -37,11 +71,16 @@ export default class BasicApi implements IBasicApi {
    * @description This code is completed by the generator (delete)
    * @returns Data
    */
-  async deleteByID(params: { id: string }): Promise<ActionResult> {
-    return await http.request({
-      method: "DELETE",
-      url: this.url + `/${params.id}`,
-    });
+  async deleteByID(params: {
+    data: { id: string };
+    options?: Options;
+  }): Promise<ActionResult> {
+    return await http.request(
+      mixinOptionToHttpParams(params, {
+        method: "DELETE",
+        url: this.url + `/${params.data.id}`,
+      })
+    );
   }
   /**
    * @name 修改指定资源
@@ -50,23 +89,30 @@ export default class BasicApi implements IBasicApi {
    * @description This code is completed by the generator (update)
    * @returns Data
    */
-  async update(params: any): Promise<ActionResult> {
-    return await http.request({
-      method: "PATCH",
-      url: this.url + `/${params.id}`,
-      data: params,
-    });
+  async updateByID(params: {
+    data: { id: string };
+    options?: Options;
+  }): Promise<ActionResult> {
+    return await http.request(
+      mixinOptionToHttpParams(params, {
+        method: "PATCH",
+        url: this.url + `/${params.data.id}`,
+        data: params,
+      })
+    );
   }
   /**
    * @name 获取列表数据
    * @description This code is completed by the generator (read)
    * @returns List<Data>
    */
-  async read(): Promise<ActionResult> {
-    return await http.request({
-      method: "GET",
-      url: this.url,
-    });
+  async read(params: { options?: Options }): Promise<ActionResult> {
+    return await http.request(
+      mixinOptionToHttpParams(params, {
+        method: "GET",
+        url: this.url,
+      })
+    );
   }
   /**
    * @name 获取指定资源
@@ -75,10 +121,15 @@ export default class BasicApi implements IBasicApi {
    * @description This code is completed by the generator (read)
    * @returns Data
    */
-  async readByID(params: { id: string }): Promise<ActionResult> {
-    return await http.request({
-      method: "GET",
-      url: this.url + `/${params.id}`,
-    });
+  async readByID(params: {
+    data: { id: string };
+    options?: Options;
+  }): Promise<ActionResult> {
+    return await http.request(
+      mixinOptionToHttpParams(params, {
+        method: "GET",
+        url: this.url + `/${params.data.id}`,
+      })
+    );
   }
 }
