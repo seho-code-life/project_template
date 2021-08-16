@@ -14,7 +14,7 @@ module.exports = {
       exclude: [/node_modules/], //忽略某些文件夹下的文件或特定文件，例如 'node_modules' 下的文件
       landscape: false, //是否添加根据 landscapeWidth 生成的媒体查询条件 @media (orientation: landscape)
       landscapeUnit: 'vw', //横屏时使用的单位
-      landscapeWidth: 1134, //横屏时使用的视口宽度
-    },
-  },
+      landscapeWidth: 1134 //横屏时使用的视口宽度
+    }
+  }
 };

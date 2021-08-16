@@ -1,4 +1,4 @@
 {
-    "liveServer.settings.port": 5501,
-    "npm-scripts.showStartNotification": false
+  "npm-scripts.showStartNotification": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

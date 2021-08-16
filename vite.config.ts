@@ -28,36 +28,36 @@ import viteCompression from 'vite-plugin-compression';
  */
 export default defineConfig({
   server: {
-    open: true,
+    open: true
   },
   alias: {
     '@': path.resolve(__dirname, 'src'),
     pages: path.resolve(__dirname, 'src/pages'),
     assets: path.resolve(__dirname, 'src/assets'),
     store: path.resolve(__dirname, 'src/store'),
-    '@types': path.resolve(__dirname, 'src/@types'),
+    '@types': path.resolve(__dirname, 'src/@types')
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/assets/styles/app.scss";',
-      },
-    },
+        additionalData: '@import "@/assets/styles/app.scss";'
+      }
+    }
   },
   build: {
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true,
-      },
-    },
+        drop_debugger: true
+      }
+    }
   },
   plugins: [
     viteCompression({
       verbose: true,
       algorithm: 'gzip',
-      threshold: 10240,
+      threshold: 10240
     }),
-    vue(),
-  ],
+    vue()
+  ]
 });

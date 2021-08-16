@@ -1,15 +1,10 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError,
-  Method,
-} from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
 // @ts-ignore
-import Cookie from "js-cookie";
-import { message } from "ant-design-vue";
-import store from "../../store";
+import Cookie from 'js-cookie';
+import { message } from 'ant-design-vue';
+import store from '../../store';
 // @ts-ignore
-import requestSign from "zigg-request-sign";
+import requestSign from 'zigg-request-sign';
 
 const { VITE_APP_ADMIN_API, VITE_APP_SECRET } = import.meta.env;
 const BASE_URL: any = VITE_APP_ADMIN_API;
@@ -17,22 +12,22 @@ const BASE_URL: any = VITE_APP_ADMIN_API;
 // 定义请求状态码的回调
 const callBackByErrorCode: { [key: number]: (res: AxiosError) => void } = {
   201: () => {
-    message.warning("首次登录，请修改密码");
+    message.warning('首次登录，请修改密码');
   },
   404: () => {
-    message.warning("资源无法访问");
+    message.warning('资源无法访问');
   },
   401: (res: AxiosError) => {
     if (res.response?.data && res.response?.data?.message) {
       message.error(res.response?.data?.message);
     } else {
-      message.warning("您的登录状态已过期,请重新登录");
+      message.warning('您的登录状态已过期,请重新登录');
     }
-    Cookie.remove("token");
+    Cookie.remove('token');
     sessionStorage.clear();
-    setTimeout(() => (window.location.href = "/#/"), 2500);
+    setTimeout(() => (window.location.href = '/#/'), 2500);
     return;
-  },
+  }
 };
 
 // 请求参数类型约定
@@ -53,8 +48,8 @@ let defaultConfig = {
   baseURL: BASE_URL,
   timeout: 30000,
   headers: {
-    Accept: "application/json",
-  },
+    Accept: 'application/json'
+  }
 };
 
 // 创建instance实例
@@ -63,24 +58,22 @@ let instance = axios.create(defaultConfig);
 // 添加axios请求拦截器
 instance.interceptors.request.use((config: HttpParams): any => {
   // 全局的loading开始加载
-  store.commit("setRequestLoading", true);
+  store.commit('setRequestLoading', true);
   // 如果当前config中存在authApi就设置私有接口Authorization，没传默认私有接口
-  if (config.authApi || typeof config.authApi === "undefined") {
+  if (config.authApi || typeof config.authApi === 'undefined') {
     // 从cookie中获取token
-    let token = Cookie.get("token");
-    config.headers["Authorization"] = "Bearer " + token;
+    let token = Cookie.get('token');
+    config.headers['Authorization'] = 'Bearer ' + token;
   }
   return config;
 });
 
 // 添加axios响应拦截器
-instance.interceptors.response.use(
-  (config: AxiosResponse<any>): AxiosResponse<any> => {
-    // 全局的loading取消加载
-    store.commit("setRequestLoading", false);
-    return config;
-  }
-);
+instance.interceptors.response.use((config: AxiosResponse<any>): AxiosResponse<any> => {
+  // 全局的loading取消加载
+  store.commit('setRequestLoading', false);
+  return config;
+});
 
 interface IRequestService {
   getBaseURL: () => string;
@@ -97,16 +90,16 @@ class HttpService implements IRequestService {
       // 如果是用户主动取消的
       return;
     }
-    if (typeof error.response?.status === "number") {
+    if (typeof error.response?.status === 'number') {
       // 根据返回的状态码去处理对应的回调函数
       const statusCallBack = callBackByErrorCode[error.response?.status];
       statusCallBack && statusCallBack(error);
     }
     if (error.response) {
       // 服务器错误
-      message.error(error.response.data.message || "服务端错误");
+      message.error(error.response.data.message || '服务端错误');
     } else {
-      message.error("请求失败");
+      message.error('请求失败');
     }
   }
   public request(params: HttpParams): Promise<ActionResult> {
@@ -124,7 +117,7 @@ class HttpService implements IRequestService {
         })
         .catch((error: AxiosError) => {
           // 如果请求出错，则把全局的loading取消掉
-          store.commit("setRequestLoading", false);
+          store.commit('setRequestLoading', false);
           this.handleError(error);
         });
       resolve(result);
@@ -134,7 +127,7 @@ class HttpService implements IRequestService {
     // 处理不同请求，请求体不一样的问题
     let _data = params.data;
     delete params.data;
-    if (params.method === "get") {
+    if (params.method === 'get') {
       _data && (params.params = _data);
     } else {
       _data && (params.data = _data);
@@ -148,7 +141,7 @@ class HttpService implements IRequestService {
       method: params.method,
       url: params.url,
       data: requestSign(VITE_APP_SECRET, params.url, params.data),
-      ...params.config,
+      ...params.config
     });
   }
 }

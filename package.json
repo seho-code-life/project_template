@@ -3,15 +3,12 @@
   "scripts": {
     "dev": "vite",
     "tsc": "vue-tsc --noEmit",
-    "lint": "eslint .  --ext .js",
+    "lint": "eslint src",
     "prettier": "prettier --write '**/*.{js,ts,json,md}'",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged",
     "build": "npm run tsc && vite build",
     "serve": "vite preview"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{.ts,.tsx,.js,.jsx}": [
@@ -19,9 +16,8 @@
       "eslint --cache --fix",
       "git add"
     ],
-    "*.{.vue}": [
+    "*.vue": [
       "prettier --write",
-      "npm run tsc",
       "eslint --cache --fix",
       "git add"
     ]
@@ -32,6 +28,7 @@
     "ant-design-vue": "^2.2.6",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
+    "eslint-plugin-vue": "^7.16.0",
     "js-cookie": "^2.2.1",
     "postcss-px-to-viewport": "^1.1.1",
     "vite-plugin-compression": "^0.2.6",

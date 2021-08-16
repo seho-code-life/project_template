@@ -1,13 +1,13 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
 export default createStore({
   state: {
     requestLoading: false
   },
   mutations: {
-    setRequestLoading(state, loading){
+    setRequestLoading(state, loading) {
       state.requestLoading = loading;
     }
   },
   actions: {},
-  modules: {},
+  modules: {}
 });
