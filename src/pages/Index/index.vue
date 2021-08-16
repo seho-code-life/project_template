@@ -1,15 +1,14 @@
 <template>
   <div class="index-box">
     {{ msg }}
-    <p class="date">{{ dayjs(Date.now()).format("YYYY-MM-DD HH:mm") }}</p>
+    <p class="date">{{ dayjs(Date.now()).format('YYYY-MM-DD HH:mm') }}</p>
   </div>
 </template>
 <script lang="ts" setup>
-import dayjs from "dayjs"
-import { ref } from "@vue/reactivity";
+import dayjs from 'dayjs';
+import { ref } from '@vue/reactivity';
 
-const msg = ref<string>("hello, ziggurat");
-
+const msg = ref<str>('hello, ziggurat');
 </script>
 <style lang="scss" scoped>
 .index-box {

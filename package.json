@@ -14,9 +14,15 @@
     }
   },
   "lint-staged": {
-    "**/*.js": [
+    "*.{.ts,.tsx,.js,.jsx}": [
+      "prettier --write",
+      "eslint --cache --fix",
+      "git add"
+    ],
+    "*.{.vue}": [
       "prettier --write",
       "npm run tsc",
+      "eslint --cache --fix",
       "git add"
     ]
   },
@@ -40,6 +46,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-egg": "^9.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
