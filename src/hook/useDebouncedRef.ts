@@ -7,7 +7,7 @@ import { customRef } from 'vue';
  * @returns {T}
  */
 
-export function useDebouncedRef<T>(value: T, delay = 200) {
+export default function useDebouncedRef<T>(value: T, delay = 200) {
   let timeout: any = null;
   return customRef((track, trigger) => {
     return {

@@ -5,7 +5,7 @@ declare module '*.vue' {
 }
 
 // 接口返回类型
-interface ActionResult {
+declare type ActionResult<T = any> = {
   success: boolean;
-  data?: any;
-}
+  data?: T;
+};
