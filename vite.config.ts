@@ -1,7 +1,7 @@
-import { defineConfig } from "vite";
-import path from "path";
-import vue from "@vitejs/plugin-vue";
-import viteCompression from "vite-plugin-compression";
+import { defineConfig } from 'vite';
+import path from 'path';
+import vue from '@vitejs/plugin-vue';
+import viteCompression from 'vite-plugin-compression';
 // import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
@@ -31,11 +31,11 @@ export default defineConfig({
     open: true,
   },
   alias: {
-    "@": path.resolve(__dirname, "src"),
-    pages: path.resolve(__dirname, "src/pages"),
-    assets: path.resolve(__dirname, "src/assets"),
-    store: path.resolve(__dirname, "src/store"),
-    "@types": path.resolve(__dirname, "src/@types"),
+    '@': path.resolve(__dirname, 'src'),
+    pages: path.resolve(__dirname, 'src/pages'),
+    assets: path.resolve(__dirname, 'src/assets'),
+    store: path.resolve(__dirname, 'src/store'),
+    '@types': path.resolve(__dirname, 'src/@types'),
   },
   css: {
     preprocessorOptions: {
@@ -55,7 +55,7 @@ export default defineConfig({
   plugins: [
     viteCompression({
       verbose: true,
-      algorithm: "gzip",
+      algorithm: 'gzip',
       threshold: 10240,
     }),
     vue(),
