@@ -129,7 +129,7 @@ function transformParams(params: HttpParams) {
   });
 }
 
-export default function useRequest<T = ActionResult>(params: HttpParams): Promise<ActionResult<T>> {
+export default function useRequest(params: HttpParams): Promise<ActionResult> {
   // 定义请求接口需要返回的对象，默认请求失败
   const result: ActionResult = { success: false };
   // 对请求的参数做一个transform

@@ -1,4 +1,4 @@
-declare namespace ModelUser {
+declare namespace TUserModel {
   export type ReqLogin = {
     captcha: string;
     password: string;
