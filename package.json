@@ -12,7 +12,7 @@
   "lint-staged": {
     "*.{vue,react,ts,tsx,js,jsx,json,markdown}": [
       "prettier --write",
-      "eslint --fix",
+      "npm run lint",
       "git add"
     ]
   },
