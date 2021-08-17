@@ -22,21 +22,22 @@ export interface IBasicApi {
 }
 
 // 混入options到请求体中
-const mixinOptionToHttpParams = (params: any, _data: any): HttpParams => {
-  return Object.assign(_data, {
+const mixinOptionToHttpParams = (params: any, _data: any): HttpParams =>
+  Object.assign(_data, {
     config: {
       headers: params.options?.headers,
       authApi: params.options?.authApi
     }
   });
-};
 
 export default class BasicApi implements IBasicApi {
   public url: string;
+
   constructor(data: { version: string; moduleName: string }) {
     const { version = '', moduleName } = data;
-    this.url = `${version === '' ? '' : '/' + version}/${moduleName}`;
+    this.url = `${version === '' ? '' : `/${version}`}/${moduleName}`;
   }
+
   /**
    * @name 新增数据
    * @params {Object} params - 需要新增的数据结构体
@@ -52,6 +53,7 @@ export default class BasicApi implements IBasicApi {
       })
     );
   }
+
   /**
    * @name 删除指定资源
    * @params {Object} params - 删除指定资源API的参数
@@ -63,10 +65,11 @@ export default class BasicApi implements IBasicApi {
     return await http.request(
       mixinOptionToHttpParams(params, {
         method: 'DELETE',
-        url: this.url + `/${params.data.id}`
+        url: `${this.url}/${params.data.id}`
       })
     );
   }
+
   /**
    * @name 修改指定资源
    * @params {Object} params - 修改指定资源API的参数
@@ -78,11 +81,12 @@ export default class BasicApi implements IBasicApi {
     return await http.request(
       mixinOptionToHttpParams(params, {
         method: 'PATCH',
-        url: this.url + `/${params.data.id}`,
+        url: `${this.url}/${params.data.id}`,
         data: params
       })
     );
   }
+
   /**
    * @name 获取列表数据
    * @description This code is completed by the generator (read)
@@ -96,6 +100,7 @@ export default class BasicApi implements IBasicApi {
       })
     );
   }
+
   /**
    * @name 获取指定资源
    * @params {Object} params - 获取指定资源API的参数
@@ -107,7 +112,7 @@ export default class BasicApi implements IBasicApi {
     return await http.request(
       mixinOptionToHttpParams(params, {
         method: 'GET',
-        url: this.url + `/${params.data.id}`
+        url: `${this.url}/${params.data.id}`
       })
     );
   }

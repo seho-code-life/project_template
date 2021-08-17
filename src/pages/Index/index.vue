@@ -8,7 +8,7 @@
 import dayjs from 'dayjs';
 import { ref } from '@vue/reactivity';
 
-const msg = ref<str>('hello, ziggurat');
+const msg = ref<string>('hello, ziggurat');
 </script>
 <style lang="scss" scoped>
 .index-box {

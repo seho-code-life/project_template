@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
 import queryString from 'query-string';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import requestSign from 'zigg-request-sign';
 
@@ -22,10 +23,10 @@ type ConfigParams = {
 const { VITE_APP_API, VITE_APP_SECRET } = import.meta.env;
 const BASE_URL = VITE_APP_API as string;
 
-const notify = (message: string) => {};
+const notify = (message: string) => message;
 
 // 封装 清空token等信息的方法
-const clearLoginState = (callBack?: Function) => {
+const clearLoginState = (callBack?: () => void) => {
   callBack && callBack();
 };
 
@@ -40,7 +41,7 @@ const callBackByErrorCode: { [key: number]: (res: AxiosError) => void } = {
   }
 };
 
-let defaultConfig: HttpParams = {
+const defaultConfig: HttpParams = {
   baseURL: BASE_URL,
   timeout: 30000,
   options: {
@@ -53,7 +54,7 @@ let defaultConfig: HttpParams = {
 };
 
 // 创建instance实例
-let instance = axios.create(defaultConfig);
+const instance = axios.create(defaultConfig);
 
 // 添加axios请求拦截器
 instance.interceptors.request.use((config: HttpParams): any => {
@@ -65,18 +66,19 @@ instance.interceptors.request.use((config: HttpParams): any => {
   // 如果当前config中存在authApi就设置私有接口Authorization，没传默认私有接口
   if (config.options?.authApi || typeof config.options?.authApi === 'undefined') {
     // 获取token
-    let token = '';
-    config.headers['Authorization'] = 'Bearer ' + token;
+    const token = '';
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
 
 // 添加axios响应拦截器
-instance.interceptors.response.use((config: AxiosResponse<any>): AxiosResponse<any> => {
-  // 全局的loading取消加载
-  // Toast.hide();
-  return config;
-});
+instance.interceptors.response.use(
+  (config: AxiosResponse<any>): AxiosResponse<any> =>
+    // 全局的loading取消加载
+    // Toast.hide();
+    config
+);
 
 // 获取baseurl，向外部提供的方法
 export function getBaseURL(): string | undefined {
@@ -106,7 +108,7 @@ function handleError(error: AxiosError) {
 // 获取请求参数的方法
 function getRequestParams(params: ConfigParams) {
   // 处理不同请求，请求体不一样的问题
-  let _data = params.data;
+  const _data = params.data;
   delete params.data;
   if (params.method?.toLocaleLowerCase() === 'get') {
     _data && (params.params = _data);
@@ -151,7 +153,7 @@ export default function useRequest<T = ActionResult>(params: HttpParams): Promis
 }
 
 export function useSign(url: string) {
-  let token = '';
+  const token = '';
   let params = {};
   if (token) {
     params = requestSign(VITE_APP_SECRET, url, { token });

@@ -2,8 +2,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "tsc": "vue-tsc --noEmit",
-    "lint": "eslint src",
+    "lint": "eslint 'src/**/*' --fix --cache",
     "prettier": "prettier --write '**/*.{js,ts,json,md}'",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
@@ -11,14 +10,9 @@
     "serve": "vite preview"
   },
   "lint-staged": {
-    "*.{.ts,.tsx,.js,.jsx}": [
+    "*.{.ts,.tsx,.js,.jsx,.vue}": [
       "prettier --write",
-      "eslint --cache --fix",
-      "git add"
-    ],
-    "*.vue": [
-      "prettier --write",
-      "eslint --cache --fix",
+      "npm run eslint",
       "git add"
     ]
   },
@@ -28,7 +22,7 @@
     "ant-design-vue": "^2.2.6",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
-    "eslint-plugin-vue": "^7.16.0",
+    "eslint-config-prettier": "^8.3.0",
     "js-cookie": "^2.2.1",
     "postcss-px-to-viewport": "^1.1.1",
     "query-string": "^7.0.1",
@@ -39,16 +33,18 @@
     "zigg-request-sign": "^1.0.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
     "@vitejs/plugin-vue": "^1.4.0",
     "@vue/compiler-sfc": "^3.2.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-egg": "^9.0.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.16.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2",
     "sass": "^1.37.5",
     "typescript": "^4.3.5",
     "vite": "^2.4.4",

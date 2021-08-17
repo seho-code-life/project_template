@@ -21,8 +21,8 @@ export const RegExp = {
   regexps_product_date: /^[1-9]\d*$/
 };
 
-export const useRegexpsValidator = (function <T extends { [key: string]: RegExp }>(regExps: T) {
-  return function (key: keyof T, value: string): boolean {
-    return regExps[key].test(value);
-  };
-})(RegExp);
+const useRegexpsValidator = (key: keyof typeof RegExp, value: string): boolean => {
+  return RegExp[key].test(value);
+};
+
+export default useRegexpsValidator;
