@@ -10,9 +10,9 @@
     "serve": "vite preview"
   },
   "lint-staged": {
-    "*.{.ts,.tsx,.js,.jsx,.vue}": [
+    "*.{vue,react,ts,tsx,js,jsx,json,markdown}": [
       "prettier --write",
-      "npm run eslint",
+      "eslint --cache --fix",
       "git add"
     ]
   },
