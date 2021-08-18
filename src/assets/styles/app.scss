@@ -1,4 +1,7 @@
+// 工具函数
 @import "../../../node_modules/sass-utils/index.scss";
+// Normalize.css
+@import "../../../node_modules/normalize.css/normalize.css";
 
 @mixin ellipsis($line: 1) {
   overflow: hidden;
