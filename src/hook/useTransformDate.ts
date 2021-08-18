@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
  * @param {string} formatType
  * @returns {string}
  */
-export default function useTransformDate(date: string | null | undefined, formatType = 'YYYY-MM-DD HH:mm:ss') {
+export default function useTransformDate(date: string | null | undefined, formatType = 'YYYY-MM-DD HH:mm:ss'): string {
   if (date) {
     return dayjs(date).format(formatType);
   }
