@@ -2,6 +2,9 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import viteCompression from 'vite-plugin-compression';
+import ViteComponents, { AntDesignVueResolver } from 'vite-plugin-components';
+import styleImport from 'vite-plugin-style-import';
+import legacy from '@vitejs/plugin-legacy';
 // import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
@@ -30,21 +33,33 @@ export default defineConfig({
   server: {
     open: true
   },
-  alias: {
-    '@': path.resolve(__dirname, 'src'),
-    pages: path.resolve(__dirname, 'src/pages'),
-    assets: path.resolve(__dirname, 'src/assets'),
-    store: path.resolve(__dirname, 'src/store'),
-    '@types': path.resolve(__dirname, 'src/@types')
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@types': path.resolve(__dirname, 'src/@types')
+    }
   },
   css: {
     preprocessorOptions: {
       scss: {
         additionalData: '@import "@/assets/styles/app.scss";'
+      },
+      less: {
+        javascriptEnabled: true
       }
     }
   },
   build: {
+    target: 'es2015',
+    rollupOptions: {
+      output: {
+        // 配置额外的入口
+        manualChunks: {
+          antdv: ['ant-design-vue']
+        }
+      }
+    },
     terserOptions: {
       compress: {
         drop_console: true,
@@ -53,10 +68,29 @@ export default defineConfig({
     }
   },
   plugins: [
+    legacy({
+      targets: ['defaults', 'not IE 11']
+    }),
     viteCompression({
       verbose: true,
       algorithm: 'gzip',
       threshold: 10240
+    }),
+    ViteComponents({
+      globalComponentsDeclaration: true,
+      customComponentResolvers: [AntDesignVueResolver()]
+    }),
+    styleImport({
+      libs: [
+        {
+          libraryName: 'ant-design-vue',
+          esModule: true,
+          resolveStyle: (name) => {
+            console.log(name);
+            return `ant-design-vue/es/${name}/style/index`;
+          }
+        }
+      ]
     }),
     vue()
   ]

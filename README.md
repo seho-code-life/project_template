@@ -7,7 +7,7 @@
 - [x] 适合中小项目的 typescipt 的 mvc 风格架构，type 类型抽离
 - [x] 常用方法贯彻 hook 风格，预装 vueuse
 - [x] Scss 基本工具库封装，实现定义一次，页面和页面无需多次引入，直接使用全局变量/函数，解放 css
-- [ ] Rollup 打包优化
+- [x] Rollup 打包优化
 - [ ] SSR/CSR 优化
 - [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
 - [ ] 动画方案
@@ -33,6 +33,7 @@
 3. [vuex4](https://next.vuex.vuejs.org/)
 4. typescript
 
+## 类型文档/组件文档
 ## env
 
 需要在根目录新建以下三个文件
@@ -84,29 +85,3 @@ http
 ```shell
 npm install --save sass-utils
 ```
-
-## vite 相关开箱即用的配置
-
-1. SSR (目前实验阶段，不稳定)
-2. JSX
-3. HMR
-
-## PWA
-
-pwa 功能是 vite 生态一个第三方插件实现的，可以根据简单的配置让应用快速变成 PWA 应用，如果你还不了解 PWA 是什么，那我简单介绍一下 PWA 应用的特性：
-
-1. 离线访问
-2. 推送
-3. 向 APP 一样在用户的电脑端或者手机端形成桌面入口
-
-pwa 的配置我配的不是很多，但是基本满足需要，后期会把离线缓存加强一下，如果有兴趣的朋友，可以提 pr。
-
-如果要更改 pwa 的应用图标，在 public 下更改 logo.png 即可。需要更改不同尺寸。
-
-查看 pwa 功能就运行部署命令，上线之后即可。
-
-```shell
-npm run build
-```
-
-[这个包叫 pwa for vite](https://github.com/antfu/vite-plugin-pwa)
