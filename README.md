@@ -10,6 +10,7 @@
 - [x] Scss 基本工具库封装，实现定义一次，页面和页面无需多次引入，直接使用全局变量/函数，解放 css
 - [x] Rollup 打包优化
 - [x] Storage,Cookie的模块化方案，且支持ts严格规定传入类型
+- [x] 预设pinia状态管理的模块化以及类型声明
 - [ ] SSR/CSR 优化
 - [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
 - [ ] 动画方案
@@ -31,7 +32,7 @@
 
 1. [vue3](https://vue3js.cn/)
 2. [vueRouter4](https://next.router.vuejs.org/guide/)
-3. [vuex4](https://next.vuex.vuejs.org/)
+3. pinia
 4. typescript
 
 ## 类型文档/组件文档
@@ -55,34 +56,3 @@ VITE_APP_SECRET=
 ## 时间处理
 
 使用轻量级的 day.js 进行处理时间的库 [查阅文档](https://www.npmjs.com/package/dayjs)
-
-## 请求
-
-请求使用了 axios，包括内置了 js-cookie 的一些开发包。
-
-```js
-import http from '../../common/service/request';
-
-http
-  .request(
-    {
-      authApi: true,
-      url: '',
-      method: 'post'
-    },
-    {
-      isLoading: true
-    }
-  )
-  .then((res) => {
-    console.log(res);
-  });
-```
-
-## css 预编译工具
-
-使用 sass，业务中如果有很多 css 复杂处理就需要一个 sass 工具包来解决，推荐下面这个包，采用的也是 BEM 规范。
-
-```shell
-npm install --save sass-utils
-```
