@@ -21,7 +21,6 @@
 | dev        | 快速启动本地开发服务器                                  |
 | lint       | 带有--fix 的 eslint 校验                                |
 | prettier   | eslint-prettier 的美化代码命令                          |
-| lint       | 带有--fix 的 eslint 校验                                |
 | prepare    | npm install 自动执行的 husky 安装命令（不使用的请忽略） |
 | lint-stage | 对 git 暂存区的文件进行操作，源于 lint-stage 插件       |
 | build      | vite 内置的打包使用 rollup，此模板自带打包优化          |
