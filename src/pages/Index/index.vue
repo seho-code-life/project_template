@@ -24,6 +24,5 @@ message.info('hello');
 .date {
   font-size: 8px;
   color: red;
-  @include app_ellipsis(2);
 }
 </style>

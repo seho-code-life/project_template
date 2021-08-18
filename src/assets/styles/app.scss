@@ -1,7 +1,6 @@
-@import "~sass-utils";
+@import "../../../node_modules/sass-utils/index.scss";
 
-// 自定义多行超出省略号
-@mixin app_ellipsis($line: 1) {
+@mixin ellipsis($line: 1) {
   overflow: hidden;
   text-overflow: ellipsis;
   @if $line == 1 {
