@@ -1,18 +1,19 @@
 # vue3-vite2-ts-template
 
 - [x] 使用最新版本的 vite 和 vue3
+- [x] 重置样式
 - [x] git 提交前的 lint-stage+husky 校验和美化代码（prettier）, 多人协作风格统一
 - [x] 开发中强大的 eslint 校验和自动修复以及 IDE 统一配置，将错误遏制在本地
-- [x] 自带团队开发常用依赖，axios, day, querystring...
+- [x] 自带团队开发常用依赖，antdv, axios, day, querystring...
 - [x] 适合中小项目的 typescipt 的 mvc 风格架构，type 类型抽离
 - [x] 常用方法贯彻 hook 风格，预装 vueuse
 - [x] Scss 基本工具库封装，实现定义一次，页面和页面无需多次引入，直接使用全局变量/函数，解放 css
 - [x] Rollup 打包优化
+- [x] Storage,Cookie的模块化方案，且支持ts严格规定传入类型
 - [ ] SSR/CSR 优化
 - [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
 - [ ] 动画方案
 - [ ] 预装业务常用的 webcomponents 组件（团队自己开发组件库）
-- [ ] 移动端/小程序端 兼容性方案
 
 ## 命令
 
