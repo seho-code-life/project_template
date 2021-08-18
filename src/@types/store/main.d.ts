@@ -1,4 +1,4 @@
-declare type TStoreMainType = {
+declare type TStoreUserType = {
   name: 'user';
   state: {
     counter: number;

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-export const useMainStore = defineStore<TStoreMainType>('user', {
+export const useMainStore = defineStore<TStoreUserType>('user', {
   state: () => ({
     counter: 0,
     name: 'Eduardo'
