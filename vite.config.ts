@@ -80,18 +80,18 @@ export default defineConfig({
       globalComponentsDeclaration: true,
       customComponentResolvers: [AntDesignVueResolver()]
     }),
-    styleImport({
-      libs: [
-        {
-          libraryName: 'ant-design-vue',
-          esModule: true,
-          resolveStyle: (name) => {
-            console.log(name);
-            return `ant-design-vue/es/${name}/style/index`;
-          }
-        }
-      ]
-    }),
+    // styleImport({
+    //   libs: [
+    //     {
+    //       libraryName: 'ant-design-vue',
+    //       esModule: true,
+    //       resolveStyle: (name) => {
+    //         console.log(name);
+    //         return `ant-design-vue/es/${name}/style/index`;
+    //       }
+    //     }
+    //   ]
+    // }),
     vue()
   ]
 });
