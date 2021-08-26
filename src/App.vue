@@ -1,12 +1,14 @@
 <template>
-  <Spin :spinning="store.state.requestLoading">
-    <router-view></router-view>
-  </Spin>
+  <div>
+    <a-button>123</a-button>
+    <a-checkbox>Checkbox</a-checkbox>
+    <RouterView></RouterView>
+    <a-input></a-input>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { Spin } from 'ant-design-vue';
-import { onMounted } from '@vue/runtime-core';
+import { RouterView } from 'vue-router';
 import { useStore } from 'vuex';
 const store = useStore();
 </script>

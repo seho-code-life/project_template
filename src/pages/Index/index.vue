@@ -2,13 +2,12 @@
   <div class="index-box">
     {{ msg }}
     <p class="date">{{ dayjs(Date.now()).format('YYYY-MM-DD HH:mm') }}</p>
-    <Button type="primary">test</Button>
   </div>
 </template>
 <script lang="ts" setup>
 import dayjs from 'dayjs';
 import { ref } from '@vue/reactivity';
-import { Button, message } from 'ant-design-vue';
+import { message } from 'ant-design-vue';
 
 const msg = ref<string>('hello, ziggurat');
 message.info('hello');
