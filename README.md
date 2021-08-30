@@ -46,12 +46,16 @@
 
 ## 类型文档/组件文档
 
+文档待补充，暂定使用 [dumi](https://d.umijs.org/zh-CN)
+
 ## 代码提交
 旧版本的husky和新版还是有很多不一样的，所以如果你以前用过husky那么你要在代码提交这里做更多逻辑的话，可以去看看最新的文档。
 
 模板中只拦截了pre_commit这个钩子，目标就是在pre_commit的时候对代码进行lint和自动修复以及美化，而且仅要对暂存区的文件lint，所以使用了lint-staged。这个组合太常见了，有需求的开发者可以再这个上层定义一些有趣的功能提pr。
 
 还有一个需求是校验git commit message的规范，但是对于小团队来讲，校验这个规范没有太大必要，也暂时不会对团队带来好处，所以爱鼓捣的可以去鼓捣哈。
+
+可以推荐团队成员使用 [git-commit-plugin-vscode](https://marketplace.visualstudio.com/items?itemName=redjue.git-commit-plugin)
 ## vscode 开发小指南
 
 推荐使用 Volar 插件进行开发，如果你的 IDE 是 Jetbrains 系列的，那么你可能不太需要这个插件，如果你是 vscode 推荐使用 volar。使用 volar，不仅可以在 vue 开发上和
@@ -59,7 +63,7 @@ jetbrains 的表现一致，还可以得到更完善 vue3 的支持，甚至非�
 
 [下载volar地址](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 
-模板对于vscode有天然的支持，如果你使用vscode，就能使用模板自带的vscode配置，比如说保存自动lint&fix&prettier
+此模板对于vscode有天然的支持，如果你使用vscode，就能使用模板自带的vscode配置，比如说保存自动lint&fix&prettier
 ## AntdV 开发小指南
 
 传统的 antdv 的按需加载，都会使用 babel-plugin-import 这个插件进行按需分析然后自动引入，但是 antdv 中有很多嵌套的父子组件:
@@ -104,14 +108,14 @@ src/@types
 
 ```ts
 declare namespace TUserModel {
-  export type ReqLogin = {
+  type ReqLogin = {
     captcha: string;
     password: string;
     username: string;
     uuid: string;
   };
 
-  export type ResLogin = Promise<
+  type ResLogin = Promise<
     ActionResult<{
       token: string;
     }>
@@ -216,9 +220,47 @@ export default class UserController {
 
 ```
 
+控制器我们还可以对api/cache获取的数据做处理，比如说，后端返回的数据格式前端不便直接展示，我们应该在controller需要做一层转译，比如像这样：
+
+```ts
+transform(): { text: string; value: string }[] {
+    const data = {
+      '0': '小明',
+      '1': '小红'
+    };
+    let _arr = [];
+    let key: keyof typeof data;
+    for (key in data) {
+      _arr.push({
+        text: data[key],
+        value: key
+      });
+    }
+    return _arr;
+  }
+```
+
+
 ### 视图（.vue）
 
 以vue来举例，我们如何在视图优雅的调用controller？并且如何使用全局定义的类型来巩固我们的组件？
+
+```ts
+const login = async (params: TUserModel.ReqLogin) => {
+  await userController.login(params);
+};
+
+// 调用login函数
+login({
+  captcha: "",
+  password: "",
+  username: "",
+  uuid: ""
+})
+```
+
+当调用login函数时候，提供了与ReqLogin不符合的数据结构，是会出现报错的。同理，我们调用cache也是一样，需要在controller把cache封装一层暴露给vue即可。
+
 
 
 ## 环境变量
@@ -249,6 +291,9 @@ interface ImportMetaEnv {
 }
 ```
 
-## 时间处理
-
-使用轻量级的 day.js 进行处理时间的库 [查阅文档](https://www.npmjs.com/package/dayjs)
+## 其他的库
+1. dayjs
+2. axios
+3. vueuse
+4. kurimudb
+5. query-string
