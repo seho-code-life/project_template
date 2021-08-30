@@ -12,7 +12,7 @@ import UserController from 'controller/user';
 
 const userController = new UserController();
 
-const login = async (params: TUserModel.ReqLogin) => {
+const login = async (params: TUserApiModel.ReqLogin) => {
   await userController.login(params);
 };
 
