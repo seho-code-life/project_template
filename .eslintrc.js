@@ -16,6 +16,7 @@ module.exports = {
   ],
   rules: {
     // 支持ts-ignore
-    '@typescript-eslint/ban-ts-ignore': 'off'
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    'no-undef': 0
   }
 };
