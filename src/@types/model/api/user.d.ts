@@ -1,4 +1,4 @@
-namespace TUserApiModel {
+declare namespace TUserApiModel {
   type ReqLogin = {
     captcha: string;
     password: string;

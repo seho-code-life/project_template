@@ -11,8 +11,11 @@ export default class UserController {
     this.localStorageModel = new UserLocalStorage();
     this.cookieModel = new UserCookie();
   }
-  async login(req: TUserModel.ReqLogin): TUserModel.ResLogin {
+  async login(req: TUserApiModel.ReqLogin): TUserApiModel.ResLogin {
     return await this.apiModel.login(req);
+  }
+  async userMock(): Promise<ActionResult<unknown>> {
+    return await this.apiModel.userMock();
   }
   transform(): { text: string; value: string }[] {
     const data = {
