@@ -8,7 +8,8 @@
 import dayjs from 'dayjs';
 import { ref } from '@vue/reactivity';
 import { message } from 'ant-design-vue';
-import UserController from 'controller/user';
+import UserController from '../../controller/user';
+import user from 'mock/user';
 
 const userController = new UserController();
 
@@ -17,12 +18,18 @@ const login = async (params: TUserApiModel.ReqLogin) => {
 };
 
 // 调用login函数
-login({
-  captcha: '',
-  password: '',
-  username: '',
-  uuid: ''
-});
+// login({
+//   captcha: '',
+//   password: '',
+//   username: '',
+//   uuid: ''
+// });
+
+const testMock = async () => {
+  await userController.userMock();
+};
+
+testMock();
 
 const msg = ref<string>('hello, world');
 message.info('hello');

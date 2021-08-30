@@ -11,6 +11,7 @@
 - [x] Rollup 打包优化
 - [x] Storage,Cookie 的模块化方案，且支持 ts 严格规定传入类型
 - [x] 预设 Pinia 状态管理的模块化以及类型声明
+- [x] 预设开发环境的Mock功能
 - [ ] SSR/CSR 优化
 - [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
 - [ ] 动画方案
@@ -292,6 +293,40 @@ interface ImportMetaEnv {
   // 新的环境变量的定义写这里
 }
 ```
+
+## Mock
+使用`vite-plugin-mock`来做本地开发的mock，模板暂时没有内置生产环境的mock。
+
+```ts
+// vite.config.ts
+viteMockServe({
+  localEnabled: true //是否开启本地的mock功能
+}),
+```
+
+定义mock api:
+
+```ts
+// /mock/user.ts
+
+import { MockMethod } from 'vite-plugin-mock';
+export default [
+  {
+    url: '/api/get',
+    method: 'get',
+    response: (res: any) => {
+      return {
+        code: 0,
+        data: {
+          name: 'this is mock name'
+        }
+      };
+    }
+  }
+] as MockMethod[];
+
+```
+
 
 ## 其他的库
 1. dayjs
