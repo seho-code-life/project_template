@@ -8,8 +8,23 @@
 import dayjs from 'dayjs';
 import { ref } from '@vue/reactivity';
 import { message } from 'ant-design-vue';
+import UserController from 'controller/user';
 
-const msg = ref<string>('hello, ziggurat');
+const userController = new UserController();
+
+const login = async (params: TUserModel.ReqLogin) => {
+  await userController.login(params);
+};
+
+// 调用login函数
+login({
+  captcha: '',
+  password: '',
+  username: '',
+  uuid: ''
+});
+
+const msg = ref<string>('hello, world');
 message.info('hello');
 </script>
 <style lang="scss" scoped>

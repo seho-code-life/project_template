@@ -14,4 +14,19 @@ export default class UserController {
   async login(req: TUserModel.ReqLogin): TUserModel.ResLogin {
     return await this.apiModel.login(req);
   }
+  transform(): { text: string; value: string }[] {
+    const data = {
+      '0': '小明',
+      '1': '小红'
+    };
+    const _arr = [];
+    let key: keyof typeof data;
+    for (key in data) {
+      _arr.push({
+        text: data[key],
+        value: key
+      });
+    }
+    return _arr;
+  }
 }
