@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'ax
 import queryString from 'query-string';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import requestSign from 'zigg-request-sign';
+// import requestSign from 'zigg-request-sign';
 
 // 请求参数类型约定
 export type HttpParams = {
@@ -121,10 +121,11 @@ function getRequestParams(params: ConfigParams) {
 // 转换参数
 function transformParams(params: HttpParams) {
   // 判断请求的类型, 处理请求体
+  // data: requestSign(VITE_APP_SECRET, params.url, params.data),
   return getRequestParams({
     method: params.method,
     url: params.url,
-    data: requestSign(VITE_APP_SECRET, params.url, params.data),
+    data: params.data,
     ...params
   });
 }
@@ -152,13 +153,13 @@ export default function useRequest(params: HttpParams): Promise<ActionResult> {
   });
 }
 
-export function useSign(url: string) {
-  const token = '';
-  let params = {};
-  if (token) {
-    params = requestSign(VITE_APP_SECRET, url, { token });
-  } else {
-    params = requestSign(VITE_APP_SECRET, url);
-  }
-  return queryString.stringify(params);
-}
+// export function useSign(url: string) {
+//   const token = '';
+//   let params = {};
+//   if (token) {
+//     params = requestSign(VITE_APP_SECRET, url, { token });
+//   } else {
+//     params = requestSign(VITE_APP_SECRET, url);
+//   }
+//   return queryString.stringify(params);
+// }
