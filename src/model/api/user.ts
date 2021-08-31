@@ -1,5 +1,5 @@
 import useRequest from '../../hook/useRequest';
-
+import TUserApiModel from '../../@types/model/api/user';
 export default class UserApiModel {
   async login(params: TUserApiModel.ReqLogin): TUserApiModel.ResLogin {
     return await useRequest({

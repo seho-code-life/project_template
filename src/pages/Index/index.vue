@@ -9,8 +9,7 @@ import dayjs from 'dayjs';
 import { ref } from '@vue/reactivity';
 import { message } from 'ant-design-vue';
 import UserController from '../../controller/user';
-import user from 'mock/user';
-
+import TUserApiModel from '../../@types/model/api/user';
 const userController = new UserController();
 
 const login = async (params: TUserApiModel.ReqLogin) => {
@@ -31,7 +30,7 @@ const testMock = async () => {
 
 testMock();
 
-const msg = ref<string>('hello, world');
+let msg = $ref<string>('hello, world');
 message.info('hello');
 </script>
 <style lang="scss" scoped>

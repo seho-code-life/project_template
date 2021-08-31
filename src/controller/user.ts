@@ -1,3 +1,4 @@
+import TUserApiModel from './../@types/model/api/user';
 import UserApiModel from '../model/api/user';
 import { UserLocalStorage, UserCookie } from '../model/cache/user';
 
