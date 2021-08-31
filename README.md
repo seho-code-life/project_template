@@ -66,7 +66,38 @@ jetbrains 的表现一致，还可以得到更完善 vue3 的支持，甚至非�
 
 [下载volar地址](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 
-此模板对于vscode有天然的支持，如果你使用vscode，就能使用模板自带的vscode配置，比如说保存自动lint&fix&prettier
+此模板对于vscode有天然的支持，如果你使用vscode，就能使用模板自带的vscode配置，比如说保存自动lint&fix&prettier或者其他有意思的功能。
+
+1. 有那么一点智能的代码模板🐶
+
+模板中自带了若干个vscode的code-snippets，snippets将会持续更新，它和模板深度贴合，可以帮助你摆脱繁琐的开发。下面就一一描述几个snippets的作用: 
+
+- model-init-type
+> 初始化@types/model/api的提示工具，自动声明命名空间以及导出
+
+<img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/cd983ea7-89a9-42f5-ab95-019190a805e8.gif"/>
+
+- model-init-api
+> 初始化model下的api类，自动引入与之匹配的type类型声明文件以及其他可能用到的依赖
+
+<img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/12b51827-c296-49cf-a16f-a790d6213390.gif"/>
+
+- model-init-cache
+> 初始化model下的cache类，自动引入与之匹配的type类型声明文件以及其他可能用到的依赖
+
+<img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/3974f3d2-2eba-44c9-b621-6c30e6241ce3.gif"/>
+
+- controller-init
+
+> 初始化控制器类
+
+<img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/3f1939a3-6657-44eb-8125-6ac141e7d138.gif">
+
+- vue-init
+> 初始化vue页面/组件
+
+<img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/3a5e4588-72ec-49f7-8a49-f390b9966bfd.gif"/>
+
 ## AntdV 开发小指南
 
 传统的 antdv 的按需加载，都会使用 babel-plugin-import 这个插件进行按需分析然后自动引入，但是 antdv 中有很多嵌套的父子组件:
@@ -81,7 +112,7 @@ jetbrains 的表现一致，还可以得到更完善 vue3 的支持，甚至非�
 1. vite-plugin-components
 2. vite-plugin-style-import
 
-第一个插件主要帮助我们自动识别模板中用到的组件，实现自动引入，也就是说我们使用antdv这样的组件库的时候，不需要全局，甚至不需要手动的import就可以实现按需引入，如图:
+第一个插件主要帮助我们自动识别模板中用到的组件，实现自动引入，也就是说我们使用antdv这样的组件库的时候，不需要全量引入，甚至不需要手动的import就可以自动实现按需引入，如图:
 
 <img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-c7e81452-9d28-4486-bedc-5dbf7c8386a5/1e56ccda-acb2-4db0-bfd0-3d852ee6173a.png">
 
@@ -110,7 +141,7 @@ src/@types
 里面最重度使用的应该是model，我们在model模型中根据业务定义了很多ts，比如user.ts:
 
 ```ts
-declare namespace TUserModel {
+namespace TUserApiModel {
   type ReqLogin = {
     captcha: string;
     password: string;
@@ -124,6 +155,8 @@ declare namespace TUserModel {
     }>
   >;
 }
+
+export default TUserApiModel;
 
 ```
 这两个就代表了model里面api层(后面会详细说明model里面的api)，使用Req和Res作为前缀也就是请求和响应的类型，那么我们定义好之后，在整个工程中我就可以这样使用类型:
@@ -161,7 +194,7 @@ export default class UserApiModel {
 }
 
 ```
-useRequest是我们自定义实现的hook函数，我们通过这个hook可以发起请求，那么你可以看到在这个类中定义了login这个方法，入参类型就是全局的TUserModel.ReqLogin, 返回类型就是全局的TUserModel.ResLogin，这个类型都是我们在@types全局定义的。
+useRequest是我们自定义实现的hook函数，我们通过这个hook可以发起请求，那么你可以看到在这个类中定义了login这个方法，入参类型就是TUserModel.ReqLogin, 返回类型就是TUserModel.ResLogin，这个类型都是我们在@types定义的。
 
 再比如说我们搭配kurimudb做了缓存的模块化，最常用的缓存插件也预装好了，我们可以在model里面去写这样一段代码：
 
@@ -246,9 +279,11 @@ transform(): { text: string; value: string }[] {
 
 ### 视图（.vue）
 
-以vue来举例，我们如何在视图优雅的调用controller？并且如何使用全局定义的类型来巩固我们的组件？
+以vue来举例，我们如何在视图优雅的调用controller？并且如何使用@types定义的类型来巩固我们的组件？
 
 ```ts
+import TUserApiModel from '../../@types/model/api/user';
+
 const login = async (params: TUserModel.ReqLogin) => {
   await userController.login(params);
 };
