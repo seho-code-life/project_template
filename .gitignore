@@ -4,9 +4,5 @@ dist
 dist
 dist-ssr
 *.local
-
-.env
-.env.dev
-.env.prod
-
-src/mock
+.env*
+mock

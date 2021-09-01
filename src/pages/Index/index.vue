@@ -30,7 +30,7 @@ const testMock = async () => {
 
 testMock();
 
-let msg = $ref<string>('hello, world');
+let msg = ref<string>('hello, world');
 message.info('hello');
 </script>
 <style lang="scss" scoped>
