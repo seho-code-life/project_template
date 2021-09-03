@@ -2,6 +2,7 @@
   "name": "enjoy-project_tool",
   "version": "1.0.0",
   "description": "",
+  "main": "dist/main.js",
   "scripts": {
     "run": "nodemon",
     "lint": "eslint 'src/**/*' --fix",
