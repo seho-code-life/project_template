@@ -47,7 +47,17 @@
 
 ## 命令行🔧
 
-- [ ] 拉取模板&自定义需要的功能(eslint, mock, ui组件库)
+通过安装Tool，来可视化地使用模板，因为仓库中的模板大多数都不会全部用到，你可以通过tool去按需引入它们（按需引入是之后的版本）
+
+```
+npm i enjoy-project-tool -g
+```
+创建模板
+```
+enjoy create
+```
+
+Tool是使用TS开发的，如果你感兴趣可以提pr，这是[Tool的仓库](https://github.com/seho-code-life/project_tool)
 
 ## 类型文档/组件文档
 
