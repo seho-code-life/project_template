@@ -1,0 +1,6 @@
+src/
+etsc.config.
+tsconfig.json
+nodemon.json
+typeings
+.*
