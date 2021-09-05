@@ -17,7 +17,7 @@
   "lint-staged": {
     "*.{vue,react,ts,tsx,js,jsx,json,markdown}": [
       "prettier --write",
-      "npm run lint",
+      "eslint --fix",
       "git add"
     ]
   },
@@ -53,7 +53,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-vue": "^7.16.0",
+    "eslint-plugin-vue": "^7.17.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
