@@ -1,9 +1,6 @@
 <template>
   <div>
-    <a-button>123</a-button>
-    <a-checkbox>Checkbox</a-checkbox>
     <RouterView></RouterView>
-    <a-input></a-input>
   </div>
 </template>
 

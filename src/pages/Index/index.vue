@@ -33,6 +33,10 @@ testMock();
 let msg = ref<string>('hello, world');
 message.info('hello');
 </script>
+<route lang="yaml">
+meta:
+  layout: content
+</route>
 <style lang="scss" scoped>
 .index-box {
   text-align: center;
