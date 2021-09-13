@@ -1,15 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Index from '../pages/Index/index.vue';
+import routes from 'virtual:generated-pages';
 
 const routerHashHistory = createWebHashHistory();
 const Router = createRouter({
   history: routerHashHistory,
-  routes: [
-    {
-      name: 'Index',
-      path: '/',
-      component: Index
-    }
-  ]
+  routes
 });
 export default Router;

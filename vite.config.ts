@@ -7,6 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import legacy from '@vitejs/plugin-legacy';
 import styleImport from 'vite-plugin-style-import';
 import { generateModifyVars } from './build/style/generateModifyVars';
+import Pages from 'vite-plugin-pages';
 import { viteMockServe } from 'vite-plugin-mock';
 
 // import { VitePWA } from "vite-plugin-pwa";
@@ -279,6 +280,12 @@ export default defineConfig({
       globalComponentsDeclaration: true
     }),
     vue(),
+    Pages({
+      exclude: ['**/components/*.vue'],
+      importMode(path) {
+        return 'async';
+      }
+    }),
     viteMockServe({
       localEnabled: true
     }),

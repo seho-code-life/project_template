@@ -12,11 +12,11 @@
 - [x] Storage,Cookie 的模块化方案，且支持 ts 严格规定传入类型
 - [x] 预设 Pinia 状态管理的模块化以及类型声明
 - [x] 预设开发环境的Mock功能
+- [x] 预设自动装载路由功能 ([vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)) 
 - [ ] SSR/CSR 优化
 - [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
 - [ ] 动画方案
 - [ ] 预装业务常用的 webcomponents 组件（团队自己开发组件库）
-
 ## 命令
 
 | 命令       | 含义                                                    |
