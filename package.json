@@ -1,25 +1,14 @@
 {
-  "version": "0.0.0",
+  "version": "1.0.0",
   "name": "project-template",
   "scripts": {
     "dev": "vite",
     "dev:test": "vite --mode test",
     "dev:prod": "vite --mode prod",
-    "lint": "eslint 'src/**/*' --fix",
-    "prettier": "prettier --write '**/*.{js,ts,json,md}'",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged",
     "build": "npm run lint && vite build",
     "build:test": "npm run lint && vite build --mode test",
     "build:prod": "npm run lint && vite build --mode prod",
     "serve": "vite preview"
-  },
-  "lint-staged": {
-    "*.{vue,react,ts,tsx,js,jsx,json,markdown}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ]
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
@@ -41,22 +30,10 @@
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
     "@vitejs/plugin-legacy": "^1.5.1",
     "@vitejs/plugin-vue": "^1.4.0",
     "@vitejs/plugin-vue-jsx": "^1.1.7",
     "@vue/compiler-sfc": "^3.2.4",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-egg": "^9.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-vue": "^7.17.0",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2",
     "sass": "^1.38.0",
     "typescript": "^4.3.5",
     "vite": "^2.5.0",
