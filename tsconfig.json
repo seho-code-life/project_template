@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "typeRoots": ["./src/@types"],
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
@@ -11,6 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
+    "typeRoots": ["./src/@types"],
     "types": ["vite/client"],
     "baseUrl": "src",
     "noImplicitAny": true,

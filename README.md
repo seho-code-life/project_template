@@ -1,18 +1,18 @@
 # vue3-vite2-ts-template
 
 - [x] 使用最新版本的 vite 和 vue3
-- [x] antdv 真正意义上的按需加载组件以及组件相关样式
+- [x] antdv 真正意义上的按需加载组件以及组件css
 - [x] git 提交前的 lint-stage+husky 校验和美化代码（prettier）, 多人协作风格统一
-- [x] 开发预设 eslint 校验和自动修复以及 IDE 统一配置，将开发错误遏制在本地
-- [x] 自带团队开发常用依赖，antdv, axios, day, querystring...
-- [x] 适合中小项目的 typescipt 的 mvc 风格架构，type 类型抽离
-- [x] 常用方法贯彻 hook 风格，预装 vueuse
-- [x] Scss 基本工具库封装，实现定义一次，页面和页面无需多次引入，直接使用全局变量/函数，解放 css
-- [x] Rollup 打包优化
-- [x] Storage,Cookie 的模块化方案，且支持 ts 严格规定传入类型
+- [x] 开发预设 eslint 校验和自动修复以及 Editorconfig
+- [x] 自带开发常用依赖，antdv, axios, day, querystring...
+- [x] 适合中小项目的 typescipt 的 mvc 风格架构
+- [x] 工具方法贯彻 hook 风格，且预装 [vueuse](https://github.com/vueuse/vueuse)
+- [x] scss 基本工具库封装，页面和页面无需引入，直接使用预定义的全局变量/函数
+- [x] vite/rollup 打包优化
+- [x] storage,cookie TS版本的模块化方案
 - [x] 预设 Pinia 状态管理的模块化以及类型声明
-- [x] 预设开发环境的Mock功能
-- [x] 预设自动装载路由功能 ([vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)) 
+- [x] 预设开发环境的 [vite-plugin-mock](vite-plugin-mock)
+- [x] 预设自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
 - [ ] SSR/CSR 优化
 - [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
 - [ ] 动画方案
@@ -29,7 +29,7 @@
 | build      | vite 内置的打包使用 rollup，此模板自带打包优化          |
 | serve      | 本地预览生产环境的程序                                  |
 
-### 预设 env 命令
+### 启动/打包 命令
 
 | 命令       | 含义                              |
 | ---------- | --------------------------------- |
