@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
-    "@vueuse/core": "^6.0.0",
-    "ant-design-vue": "^2.2.6",
+    "@vueuse/core": "^6.4.1",
+    "ant-design-vue": "^2.2.8",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
     "kurimudb": "^4.1.1",
@@ -26,7 +26,7 @@
     "postcss-px-to-viewport": "^1.1.1",
     "query-string": "^7.0.1",
     "sass-utils": "^1.0.56",
-    "vue": "^3.2.4",
+    "vue": "^3.2.12",
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
