@@ -47,7 +47,7 @@
 
 ## 命令行🔧
 
-通过安装Tool，来可视化地使用模板，因为仓库中的模板大多数都不会全部用到，你可以通过tool去按需引入它们（按需引入是之后的版本）
+通过安装Tool，来可视化地使用模板，因为仓库中的模板大多数都不会全部用到，你可以通过tool去按需引入它们
 
 ```
 npm i enjoy-project-tool -g
@@ -56,6 +56,8 @@ npm i enjoy-project-tool -g
 ```
 enjoy create
 ```
+
+当然，作为模板的伴生工具，我还会继续维护并且持续提出新的feature来减轻我们开发负担
 
 Tool是使用TS开发的，如果你感兴趣可以提pr，这是[Tool的仓库](https://github.com/seho-code-life/project_tool)
 
