@@ -4,7 +4,6 @@ import generatedRoutes from 'virtual:generated-pages';
 
 const routerHashHistory = createWebHashHistory();
 const routes = setupLayouts(generatedRoutes);
-
 const Router = createRouter({
   history: routerHashHistory,
   routes
