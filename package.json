@@ -1,9 +1,13 @@
 {
   "version": "1.0.0",
   "name": "project-template",
-  "main": "lib/index.js",
+  "main": "lib/index.umd.js",
+  "module": "lib/index.esm.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rimraf lib/* && run-p build:esm build:umd build:min",
+    "build:esm": "rollup -c --environment FORMAT:esm",
+    "build:umd": "rollup -c --environment FORMAT:umd",
+    "build:min": "rollup -c --environment FORMAT:min",
     "prettier": "prettier --write '**/*.{js,ts,json,md}'",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
@@ -17,21 +21,26 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
     "@rollup/plugin-node-resolve": "^13.0.5",
-    "rollup": "^2.58.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "typescript": "^4.3.5",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-prettier": "^3.4.0"
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "lodash.merge": "^4.6.2",
+    "nodemon": "^2.0.13",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.58.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^4.3.5"
   }
 }
