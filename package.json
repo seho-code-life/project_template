@@ -2,48 +2,10 @@
   "version": "1.0.0",
   "name": "project-template",
   "scripts": {
-    "dev": "vite",
-    "dev:test": "vite --mode test",
-    "dev:prod": "vite --mode prod",
-    "build": "npm run lint && vite build",
-    "build:test": "npm run lint && vite build --mode test",
-    "build:prod": "npm run lint && vite build --mode prod",
-    "serve": "vite preview"
+   
   },
-  "dependencies": {
-    "@ant-design/icons-vue": "^6.0.1",
-    "@vueuse/core": "^6.4.1",
-    "ant-design-vue": "^2.2.8",
-    "axios": "^0.21.1",
-    "dayjs": "^1.10.6",
-    "kurimudb": "^4.1.1",
-    "kurimudb-driver-cookie": "^4.0.0",
-    "kurimudb-driver-localstorage": "^4.0.0",
-    "less": "^4.1.1",
-    "mockjs": "^1.1.0",
-    "normalize.css": "^8.0.1",
-    "pinia": "^2.0.0-rc.4",
-    "postcss-px-to-viewport": "^1.1.1",
-    "query-string": "^7.0.1",
-    "sass-utils": "^1.0.56",
-    "vue": "^3.2.12",
-    "vue-router": "^4.0.11"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@vitejs/plugin-legacy": "^1.5.1",
-    "@vitejs/plugin-vue": "^1.4.0",
-    "@vitejs/plugin-vue-jsx": "^1.1.7",
-    "@vue/compiler-sfc": "^3.2.4",
-    "sass": "^1.38.0",
-    "typescript": "^4.3.5",
-    "vite": "^2.5.0",
-    "vite-plugin-components": "^0.13.2",
-    "vite-plugin-compression": "^0.3.5",
-    "vite-plugin-mock": "^2.9.6",
-    "vite-plugin-pages": "^0.18.1",
-    "vite-plugin-pwa": "^0.7.3",
-    "vite-plugin-style-import": "^1.2.1",
-    "vite-plugin-vue-layouts": "^0.4.1",
-    "vue-tsc": "^0.0.24"
+    "typescript": "^4.3.5"
   }
 }
