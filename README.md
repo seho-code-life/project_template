@@ -16,4 +16,4 @@ enjoy create
 
 - [vue3+vite2+typescript+antdv 项目模板](https://github.com/seho-code-life/project_template/tree/vue3-vite2-ts-template(release))
 - [typescript 命令行工具模板](https://github.com/seho-code-life/project_template/tree/node-command-cli)
-- [typescript+rollup 库/插件模板](https://github.com/seho-code-life/project_template/tree/rollup-typescript-package(dev))
+- [typescript+rollup 库/插件模板](https://github.com/seho-code-life/project_template/tree/rollup-typescript-package(release))
