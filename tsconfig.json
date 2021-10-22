@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "typeRoots": ["./src/@types"],
+    "typeRoots": ["./typeings"],
     "types": ["vite/client"],
     "baseUrl": "src",
     "noImplicitAny": true,
