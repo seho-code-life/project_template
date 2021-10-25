@@ -4,7 +4,7 @@
     "scope": "typescript",
     "prefix": "controller-init",
     "body": [
-      "import T${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ApiModel from '../@types/model/api/${TM_FILENAME_BASE}';",
+      "import T${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ApiModel from '../../typings/model/api/${TM_FILENAME_BASE}';",
       "import ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ApiModel from '../model/api/$TM_FILENAME_BASE';",
       "export default class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Controller {",
       "  private apiModel: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ApiModel;",
@@ -22,7 +22,7 @@
     "prefix": "model-init-api",
     "body": [
       "import useRequest from '../../hook/useRequest';",
-      "import T${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ApiModel from '../../@types/model/api/${TM_FILENAME_BASE}';",
+      "import T${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ApiModel from '../../../typings/model/api/${TM_FILENAME_BASE}';",
       "export default class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ApiModel {$2}",
     ],
     "description": "enjoy-根据model名称创建一个api模型并且导出"
@@ -31,7 +31,7 @@
     "scope": "typescript",
     "prefix": "model-init-cache",
     "body": [
-      "import T${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}CacheModel from '../../@types/model/cache/${TM_FILENAME_BASE}';",
+      "import T${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}CacheModel from '../../../typings/model/cache/${TM_FILENAME_BASE}';",
       "import { Models } from 'kurimudb';",
       "import { LocalStorageDriver } from 'kurimudb-driver-localstorage';",
       "import { CookieDriver } from 'kurimudb-driver-cookie';",
