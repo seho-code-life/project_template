@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   root: true,
   env: { browser: true, es2021: true, node: true },
   parser: 'vue-eslint-parser',
