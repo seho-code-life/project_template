@@ -13,7 +13,7 @@
 - [x] 预设 Pinia 状态管理的模块化以及类型声明
 - [x] 预设开发环境的 [vite-plugin-mock](vite-plugin-mock)
 - [x] 预设自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
-- [x] 可以与 Yapi 无缝结合，详见
+- [x] 可以与 Yapi 无缝结合，[详见](https://www.yinzhuoei.com/index.php/archives/596/)
 - [x] 使用 [TS-Jest](https://github.com/kulshekhar/ts-jest) 编写测试用例
 - [ ] 贴合大多数 Vue 主流 UI 库
 - [ ] SSR/CSR 优化
@@ -352,6 +352,7 @@ login({
 ```
 VITE_APP_API=
 VITE_APP_SECRET=
+VITE_MOCK_URL=
 ```
 
 那么同理，如果业务需要额外增加新的自定义环境变量，则需要在 src/vite-env.d.ts 中重新定义类型:
@@ -361,6 +362,7 @@ VITE_APP_SECRET=
 interface ImportMetaEnv {
   VITE_APP_API: string;
   VITE_APP_SECRET: string;
+  VITE_APP_MOCK: string;
   // 新的环境变量的定义写这里
 }
 ```
