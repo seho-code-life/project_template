@@ -10,12 +10,8 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "typeRoots": ["./typeings"],
-    "types": ["vite/client"],
-    "baseUrl": "src",
     "noImplicitAny": true,
     "noImplicitThis": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "exclude": ["node_modules", "dist"]
 }

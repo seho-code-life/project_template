@@ -20,7 +20,19 @@ type ConfigParams = {
   params?: any;
 };
 
-const { VITE_APP_API, VITE_APP_SECRET } = import.meta.env;
+// api url
+let VITE_APP_API = '';
+// app secret
+let VITE_APP_SECRET = '';
+
+// 如果不是jest测试环境
+if (process.env.npm_lifecycle_event !== 'test') {
+  VITE_APP_API = import.meta.env.VITE_APP_API;
+  VITE_APP_SECRET = import.meta.env.VITE_APP_SECRET;
+} else {
+  // 如果是jest测试环境
+  VITE_APP_API = process.env.VITE_APP_API as string;
+}
 const BASE_URL = VITE_APP_API as string;
 
 const notify = (message: string) => message;
@@ -130,25 +142,23 @@ function transformParams(params: HttpParams) {
   });
 }
 
-export default function useRequest(params: HttpParams): Promise<ActionResult> {
+export default function useRequest<R = unknown>(params: HttpParams): Promise<R> {
   // 定义请求接口需要返回的对象，默认请求失败
-  const result: ActionResult = { success: false };
   // 对请求的参数做一个transform
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     instance
       .request(transformParams(params))
       .then((res) => {
-        if (res.status === 200) {
-          result.success = true;
-          result.data = res.data;
+        if ([200, 204].includes(res.status)) {
+          resolve({
+            ...res.data
+          });
         }
-        resolve(result);
       })
       .catch((error: AxiosError) => {
         // 如果请求出错，则把全局的loading取消掉
-
         handleError(error);
-        resolve(result);
+        reject(error);
       });
   });
 }
