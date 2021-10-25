@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   plugins: {
     'postcss-px-to-viewport': {
       unitToConvert: 'px', //需要转换的单位，默认为"px"

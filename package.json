@@ -1,7 +1,6 @@
 {
   "version": "0.0.0",
   "name": "project-template",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "dev:test": "vite --mode test",
