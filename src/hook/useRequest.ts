@@ -1,13 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
-import queryString from 'query-string';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-// import requestSign from 'zigg-request-sign';
 
 // 请求参数类型约定
 export type HttpParams = {
   options?: {
-    authApi?: boolean; // 是否私有API(即登陆之后才可以访问的api)
+    authApi?: boolean; // 是否私有API(即登陆之后才可以访问的api
     globalLoading?: boolean;
   };
 } & AxiosRequestConfig;
@@ -16,8 +12,8 @@ export type HttpParams = {
 type ConfigParams = {
   method?: Method;
   url?: string;
-  data?: any;
-  params?: any;
+  data?: unknown;
+  params?: unknown;
 };
 
 // api url
@@ -35,29 +31,23 @@ if (process.env.npm_lifecycle_event !== 'test') {
 }
 const BASE_URL = VITE_APP_API as string;
 
+// ### 定义提示框的逻辑，比如antd，就可以是message.info，诸如此类
 const notify = (message: string) => message;
-
-// 封装 清空token等信息的方法
-const clearLoginState = (callBack?: () => void) => {
-  callBack && callBack();
-};
 
 // 定义请求状态码的回调
 const callBackByErrorCode: { [key: number]: (res: AxiosError) => void } = {
   401: (res: AxiosError) => {
-    // 清空 然后返回
-    clearLoginState(() => {
-      window.location.href = '/#/user/login';
-      notify('登录状态已过期，请重新登录');
-    });
+    // ### 状态码回调
   }
 };
 
+// 默认请求配置
 const defaultConfig: HttpParams = {
   baseURL: BASE_URL,
   timeout: 30000,
   options: {
     authApi: true,
+    // loading加载
     globalLoading: true
   },
   headers: {
@@ -70,14 +60,13 @@ const instance = axios.create(defaultConfig);
 
 // 添加axios请求拦截器
 instance.interceptors.request.use((config: HttpParams): any => {
-  // 判断本次请求传递globalLoading是true/false，如果是false，本地请求不加载全局loading
+  // 判断本次请求传递globalLoading是true/false，如果是false，本次请求不加载全局loading
   if (config.options?.globalLoading) {
-    // 全局的loading开始加载
-    // Toast.loading("");
+    // ### 全局的loading开始加载
   }
-  // 如果当前config中存在authApi就设置私有接口Authorization，没传默认私有接口
+  // 如果当前config中存在authApi=true就设置Authorization，如果authApi没传就是私有接口
   if (config.options?.authApi || typeof config.options?.authApi === 'undefined') {
-    // 获取token
+    // ### 获取token，把值赋给token变量
     const token = '';
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -85,17 +74,10 @@ instance.interceptors.request.use((config: HttpParams): any => {
 });
 
 // 添加axios响应拦截器
-instance.interceptors.response.use(
-  (config: AxiosResponse<any>): AxiosResponse<any> =>
-    // 全局的loading取消加载
-    // Toast.hide();
-    config
-);
-
-// 获取baseurl，向外部提供的方法
-export function getBaseURL(): string | undefined {
-  return defaultConfig.baseURL;
-}
+instance.interceptors.response.use((config: AxiosResponse<unknown>): AxiosResponse<unknown> => {
+  // ### 全局的loading取消加载
+  return config;
+});
 
 // 处理请求错误的函数
 function handleError(error: AxiosError) {
@@ -132,7 +114,8 @@ function getRequestParams(params: ConfigParams) {
 
 // 转换参数
 function transformParams(params: HttpParams) {
-  // 判断请求的类型, 处理请求体
+  // ### 判断请求的类型, 处理请求体
+  // ### 在这里可以对api进行签名，比如说如下
   // data: requestSign(VITE_APP_SECRET, params.url, params.data),
   return getRequestParams({
     method: params.method,
@@ -143,7 +126,6 @@ function transformParams(params: HttpParams) {
 }
 
 export default function useRequest<R = unknown>(params: HttpParams): Promise<R> {
-  // 定义请求接口需要返回的对象，默认请求失败
   // 对请求的参数做一个transform
   return new Promise((resolve, reject) => {
     instance
@@ -162,14 +144,3 @@ export default function useRequest<R = unknown>(params: HttpParams): Promise<R> 
       });
   });
 }
-
-// export function useSign(url: string) {
-//   const token = '';
-//   let params = {};
-//   if (token) {
-//     params = requestSign(VITE_APP_SECRET, url, { token });
-//   } else {
-//     params = requestSign(VITE_APP_SECRET, url);
-//   }
-//   return queryString.stringify(params);
-// }
