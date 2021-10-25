@@ -15,7 +15,7 @@ module.exports = {
     'plugin:prettier/recommended' // 确保在最后一个 屏蔽了eslint格式上的校验（避免和prettier冲突）， extends引用顺序和优先级有关，所以必须最后一个
   ],
   rules: {
-    // 支持ts-ignore
-    '@typescript-eslint/ban-ts-ignore': 'off'
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   }
 };
