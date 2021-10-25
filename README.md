@@ -15,7 +15,7 @@
 - [x] 预设自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
 - [x] 可以与 Yapi 无缝结合，详见
 - [x] 使用 [TS-Jest](https://github.com/kulshekhar/ts-jest) 编写测试用例
-- [ ] 贴合大多数 Vue 主流 UI 库
+- [ ] 贴合大多数 Vue 主流 UI 库
 - [ ] SSR/CSR 优化
 - [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
 - [ ] 动画方案
