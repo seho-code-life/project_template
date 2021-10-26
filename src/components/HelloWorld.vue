@@ -6,7 +6,11 @@
 </template>
 <script lang="ts" setup>
 import dayjs from 'dayjs'
+import { useUserStore } from '../store/user'
 const date = ref(dayjs().format('YYYY-MM-DD'))
+const userStore = useUserStore()
+userStore.resetAge()
+console.log(userStore.$state)
 </script>
 <style lang="scss" scoped>
 .component {

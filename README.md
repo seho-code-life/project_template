@@ -8,7 +8,7 @@
 - [x] vscode [代码片段/优化](#vscode-开发小指南)
 - [x] 预设 Storage, Cookie TS 版本的模块化方案
 - [x] 预设 Eslint 以及 Editorconfig
-- [x] 预设 Pinia 状态管理的模块化以及类型声明
+- [x] 预设 Pinia 状态管理
 - [x] 预设 开发环境的 [vite-plugin-mock](vite-plugin-mock)
 - [x] 预设 自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
 - [x] 预设 [TS-Jest](https://github.com/kulshekhar/ts-jest) 编写测试用例

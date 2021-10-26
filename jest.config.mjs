@@ -2,7 +2,7 @@
 process.env = {
   ...process.env,
   VITE_APP_API: 'http://serverless.aliyun.test.project-template-api.yinzhuoei.com'
-};
+}
 
 // 导出一个配置对象
 export default {
@@ -16,4 +16,4 @@ export default {
     }
   },
   extensionsToTreatAsEsm: ['.ts']
-};
+}
