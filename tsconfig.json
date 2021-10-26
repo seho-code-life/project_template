@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
@@ -11,7 +12,11 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "noImplicitAny": true,
-    "noImplicitThis": true
+    "noImplicitThis": true,
+    "types": ["vite/client", "vite-plugin-pages/client", "vite-plugin-vue-layouts/client"],
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["dist", "node_modules"]
 }
