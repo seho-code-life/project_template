@@ -1,25 +1,22 @@
 # vue3-vite2-ts-template
 
-- [x] 使用最新版本的 vite 和 vue3
-- [x] antdv 真正意义上的按需加载组件以及组件 css
-- [x] git 提交前的 lint-stage+husky 校验和美化代码（prettier）, 多人协作风格统一
-- [x] 开发预设 eslint 校验和自动修复以及 Editorconfig
-- [x] 自带开发常用依赖，antdv, axios, day, querystring...
+- [x] 无需引入直接使用组件/函数 [详情](##组件/函数自动按需导入)
+- [x] 支持[Windicss](https://cn.windicss.org/)
+- [x] 代码提交前的 lint-stage+husky 校验和美化代码, 多人协作风格统一
 - [x] 适合中小项目的 typescipt 的 mvc 风格架构
-- [x] 工具方法贯彻 hook 风格，且预装 [vueuse](https://github.com/vueuse/vueuse)
-- [x] scss 基本工具库封装，页面和页面无需引入，直接使用预定义的全局变量/函数
-- [x] vite/rollup 打包优化
-- [x] storage,cookie TS 版本的模块化方案
+- [x] vite/rollup 打包优化（gzip,legacy 兼容）
+- [x] vscode [代码片段/优化](##vscode开发小指南)
+- [x] 预设 Storage, Cookie TS 版本的模块化方案
+- [x] 预设 Eslint 以及 Editorconfig
 - [x] 预设 Pinia 状态管理的模块化以及类型声明
-- [x] 预设开发环境的 [vite-plugin-mock](vite-plugin-mock)
-- [x] 预设自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
-- [x] 可以与 Yapi 无缝结合，[详见](https://www.yinzhuoei.com/index.php/archives/596/)
-- [x] 使用 [TS-Jest](https://github.com/kulshekhar/ts-jest) 编写测试用例
-- [ ] 贴合大多数 Vue 主流 UI 库
+- [x] 预设 开发环境的 [vite-plugin-mock](vite-plugin-mock)
+- [x] 预设 自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
+- [x] 预设 [TS-Jest](https://github.com/kulshekhar/ts-jest) 编写测试用例
+- [x] 可以与 Yapi [无缝结合](https://www.yinzhuoei.com/index.php/archives/596/)
+- [x] 与 UI 框架不耦合，可以使用 antdv,element,vant 等
+- [x] 自带开发常用依赖，antdv, axios, dayjs, querystring...
 - [ ] SSR/CSR 优化
-- [ ] 业务组件/type 类型文档自动生成，且在启动开发服务器时，自动打开 doc
-- [ ] 动画方案
-- [ ] 预装业务常用的 webcomponents 组件（团队自己开发组件库）
+- [ ] 项目文档工具
 
 ## 环境需求
 
@@ -129,32 +126,58 @@ jetbrains 的表现一致，还可以得到更完善 vue3 的支持，甚至非�
 
 <img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/3a5e4588-72ec-49f7-8a49-f390b9966bfd.gif"/>
 
-## AntdV 开发小指南
+## 组件/函数自动按需导入
 
-传统的 antdv 的按需加载，都会使用 babel-plugin-import 这个插件进行按需分析然后自动引入，但是 antdv 中有很多嵌套的父子组件:
+一般使用组件的按需导入功能，都会使用 babel-plugin-import 这个插件进行按需分析然后自动引入，但是 vite 中提供给我们了:
 
-```
+1. unplugin-vue-components
+2. unplugin-auto-import
+
+使得我们可以这样在 template 中去描述组件而无需导入
+
+```html
 <a-menu>
   <a-menu-item></a-menu-item>
 </a-menu>
 ```
 
-由于内部设计原因，无法使用这个插件进行按需导入。最主要的是我们已经使用了 vite，本身就带有按需导入，我们只需要处理他们的 css 的按需引入即可。所以使用了 2 个插件:
+我们在 components 中的组件，也可以直接去使用它:
 
-1. vite-plugin-components
-2. vite-plugin-style-import
+```html
+<hello-world></hello-world>
+```
 
-第一个插件主要帮助我们自动识别模板中用到的组件，实现自动引入，也就是说我们使用 antdv 这样的组件库的时候，不需要全量引入，甚至不需要手动的 import 就可以自动实现
-按需引入，如图:
+同样的，我们也可以实现函数/库的自动按需导入，比如我们可以直接在 vue 中去写 ref,reactive,toRef 这样的 hook:
 
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-c7e81452-9d28-4486-bedc-5dbf7c8386a5/1e56ccda-acb2-4db0-bfd0-3d852ee6173a.png">
+```html
+<template>
+  <div class="component">
+    <div class="title text-4xl">hello, world</div>
+    <div class="date">{{ date }}</div>
+  </div>
+</template>
+<script lang="ts" setup>
+import dayjs from 'dayjs'
+const date = ref(dayjs().format('YYYY-MM-DD'))
+</script>
+<style lang="scss" scoped>
+.component {
+  .title {
+  }
+  .date {
+    margin-top: 15px;
+  }
+}
+</style>
+```
 
-而且脚手架内置了按需引入 css 的逻辑，所以 antdv 本身的设计原因导致引入 css 问题开发者也不需要担心。第二个插件主要是辅助第一个插件做按需引入 css 逻辑的。第一个插
-件做的按需引入 css 有些许问题，比如说 antdv 里面有很多 api 调用的组件，比如 message，通过 message 方法调用一个组件，这个时候 css 不生效，就需要使用第二个插件进
-行处理。
+而且自带类型提示，因为unplugin-auto-import会在src下生成一个auto-imports的类型声明文件，自动引入了相关类型。
 
-> 对于 message 这样的 api 组件的 css 不生效的原因很简单,第一个插件仅仅是解析 template 用到的组件然后自动引入 css，但是无法处理 import 进来的 api 组件，所以需要
-> 第二个插件做处理。
+目前在模板中，支持以下依赖的自动导入：
+
+```js
+['vue', 'vue-router', '@vueuse/core', 'pinia']
+```
 
 ## 开发指南
 
@@ -180,27 +203,27 @@ src/@types
 ```ts
 namespace TUserApiModel {
   type ReqLogin = {
-    captcha: string;
-    password: string;
-    username: string;
-    uuid: string;
-  };
+    captcha: string
+    password: string
+    username: string
+    uuid: string
+  }
 
   type ResLogin = Promise<
     ActionResult<{
-      token: string;
+      token: string
     }>
-  >;
+  >
 }
 
-export default TUserApiModel;
+export default TUserApiModel
 ```
 
 这两个就代表了 model 里面 api 层(后面会详细说明 model 里面的 api)，使用 Req 和 Res 作为前缀也就是请求和响应的类型，那么我们定义好之后，在整个工程中我就可以这样
 使用类型:
 
 ```ts
-TUserModel.ReqLogin;
+TUserModel.ReqLogin
 ```
 
 那么同理，types 文件夹中像 store，hook 这样的，也是根据业务划分，去定义类型的，这里就不再过多阐述了。
@@ -217,7 +240,7 @@ src/model
 前端大部分的数据来源都包含到了，api 模型定义了不同业务的 api 方法，比如 user.ts：
 
 ```ts
-import useRequest from '../../hook/useRequest';
+import useRequest from '../../hook/useRequest'
 
 export default class UserApiModel {
   async login(params: TUserModel.ReqLogin): TUserModel.ResLogin {
@@ -227,7 +250,7 @@ export default class UserApiModel {
       options: {
         authApi: true
       }
-    });
+    })
   }
 }
 ```
@@ -240,16 +263,16 @@ useRequest 是我们自定义实现的 hook 函数，我们通过这个 hook 可
 /model/cache/user.ts
 
 ```ts
-import { Models } from 'kurimudb';
-import { LocalStorageDriver } from 'kurimudb-driver-localstorage';
-import { CookieDriver } from 'kurimudb-driver-cookie';
+import { Models } from 'kurimudb'
+import { LocalStorageDriver } from 'kurimudb-driver-localstorage'
+import { CookieDriver } from 'kurimudb-driver-cookie'
 
 export class UserLocalStorage extends Models.keyValue {
   constructor() {
     super({
       name: 'user',
       driver: LocalStorageDriver
-    });
+    })
   }
 }
 
@@ -258,7 +281,7 @@ export class UserCookie extends Models.keyValue {
     super({
       name: 'user',
       driver: CookieDriver
-    });
+    })
   }
 }
 ```
@@ -276,21 +299,21 @@ src/controller
 在模板默认自带了一个 user.ts 例子，我们在上一个 model 中说明了 apiModel 和 cacheModel，这里的 controller 就直接引入它们。并且在 controller 暴露入口。
 
 ```ts
-import UserApiModel from '../model/api/user';
-import { UserLocalStorage, UserCookie } from '../model/cache/user';
+import UserApiModel from '../model/api/user'
+import { UserLocalStorage, UserCookie } from '../model/cache/user'
 
 export default class UserController {
-  private localStorageModel: UserLocalStorage;
-  private cookieModel: UserCookie;
-  private apiModel: UserApiModel;
+  private localStorageModel: UserLocalStorage
+  private cookieModel: UserCookie
+  private apiModel: UserApiModel
 
   constructor() {
-    this.apiModel = new UserApiModel();
-    this.localStorageModel = new UserLocalStorage();
-    this.cookieModel = new UserCookie();
+    this.apiModel = new UserApiModel()
+    this.localStorageModel = new UserLocalStorage()
+    this.cookieModel = new UserCookie()
   }
   async login(req: TUserModel.ReqLogin): TUserModel.ResLogin {
-    return await this.apiModel.login(req);
+    return await this.apiModel.login(req)
   }
 }
 ```
@@ -320,11 +343,11 @@ transform(): { text: string; value: string }[] {
 以 vue 来举例，我们如何在视图优雅的调用 controller？并且如何使用@types 定义的类型来巩固我们的组件？
 
 ```ts
-import TUserApiModel from '../../@types/model/api/user';
+import TUserApiModel from '../../@types/model/api/user'
 
 const login = async (params: TUserModel.ReqLogin) => {
-  await userController.login(params);
-};
+  await userController.login(params)
+}
 
 // 调用login函数
 login({
@@ -332,7 +355,7 @@ login({
   password: '',
   username: '',
   uuid: ''
-});
+})
 ```
 
 当调用 login 函数时候，提供了与 ReqLogin 不符合的数据结构，是会出现报错的。同理，我们调用 cache 也是一样，需要在 controller 把 cache 封装一层暴露给 vue 即可。
@@ -360,9 +383,9 @@ VITE_MOCK_URL=
 ```ts
 /// <reference types="vite/client" />
 interface ImportMetaEnv {
-  VITE_APP_API: string;
-  VITE_APP_SECRET: string;
-  VITE_APP_MOCK: string;
+  VITE_APP_API: string
+  VITE_APP_SECRET: string
+  VITE_APP_MOCK: string
   // 新的环境变量的定义写这里
 }
 ```
@@ -383,7 +406,7 @@ viteMockServe({
 ```ts
 // /mock/user.ts
 
-import { MockMethod } from 'vite-plugin-mock';
+import { MockMethod } from 'vite-plugin-mock'
 export default [
   {
     url: '/api/get',
@@ -394,10 +417,10 @@ export default [
         data: {
           name: 'this is mock name'
         }
-      };
+      }
     }
   }
-] as MockMethod[];
+] as MockMethod[]
 ```
 
 ## 其他的库
