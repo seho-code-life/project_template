@@ -3,6 +3,7 @@ import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import viteCompression from 'vite-plugin-compression'
 import ViteComponents from 'unplugin-vue-components/vite'
+import WindiCSS from 'vite-plugin-windicss'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -49,6 +50,7 @@ export default defineConfig({
     }
   },
   plugins: [
+    WindiCSS(),
     legacy({
       targets: ['defaults', 'not IE 11']
     }),
