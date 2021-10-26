@@ -1,11 +1,11 @@
 declare type TStoreUserType = {
-  name: 'user';
+  name: 'user'
   state: {
-    counter: number;
-    name: string;
-  };
+    counter: number
+    name: string
+  }
   getter: {
-    doubleCount: () => number;
-    doubleCountPlusOne: () => number;
-  };
-};
+    doubleCount: () => number
+    doubleCountPlusOne: () => number
+  }
+}

@@ -1,15 +1,15 @@
 namespace TListApiModel {
   interface ReqAddList {
     /** 列表标题 */
-    title: string;
+    title: string
     /** 列表内容 */
-    content: string;
+    content: string
   }
 
   interface ResAddList {
     /** 数据id */
-    id: string;
+    id: string
   }
 }
 
-export default TListApiModel;
+export default TListApiModel

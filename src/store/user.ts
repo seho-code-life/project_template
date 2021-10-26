@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 export const useMainStore = defineStore<TStoreUserType>('user', {
   state: () => ({
     counter: 0,
@@ -6,15 +6,15 @@ export const useMainStore = defineStore<TStoreUserType>('user', {
   }),
   getters: {
     doubleCount() {
-      return this.counter * 2;
+      return this.counter * 2
     },
     doubleCountPlusOne() {
-      return this.doubleCount * 2 + 1;
+      return this.doubleCount * 2 + 1
     }
   },
   actions: {
     reset() {
-      this.counter = 0;
+      this.counter = 0
     }
   }
-});
+})

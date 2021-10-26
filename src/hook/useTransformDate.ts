@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 
 /**
  * @description 转换成一个通用的时间
@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
  */
 export default function useTransformDate(date: string | null | undefined, formatType = 'YYYY-MM-DD HH:mm:ss'): string {
   if (date) {
-    return dayjs(date).format(formatType);
+    return dayjs(date).format(formatType)
   }
-  return '';
+  return ''
 }

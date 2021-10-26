@@ -19,10 +19,10 @@ export const RegExp = {
   regexps_product_zero: /^([1-9]\d*(\.\d*)?)|(0\.\d*[1-9][0-9])|(0\.\d*[1-9])$/,
   regexps_product_rate: /^0\.([1-9]|\d[1-9])$|^[1-9]\d{0,8}\.\d{0,2}$|^[1-9]\d{0,8}$/,
   regexps_product_date: /^[1-9]\d*$/
-};
+}
 
 const useRegexpsValidator = (key: keyof typeof RegExp, value: string): boolean => {
-  return RegExp[key].test(value);
-};
+  return RegExp[key].test(value)
+}
 
-export default useRegexpsValidator;
+export default useRegexpsValidator

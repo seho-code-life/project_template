@@ -1,11 +1,11 @@
-import TListApiModel from '../../typings/model/api/list';
-import ListApiModel from '../model/api/list';
+import TListApiModel from '../../typings/model/api/list'
+import ListApiModel from '../model/api/list'
 export default class ListController {
-  private apiModel: ListApiModel;
+  private apiModel: ListApiModel
   constructor() {
-    this.apiModel = new ListApiModel();
+    this.apiModel = new ListApiModel()
   }
   addList(params: TListApiModel.ReqAddList) {
-    return this.apiModel.addList(params);
+    return this.apiModel.addList(params)
   }
 }
