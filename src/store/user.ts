@@ -1,20 +1,18 @@
 import { defineStore } from 'pinia'
-export const useMainStore = defineStore<TStoreUserType>('user', {
+export const useUserStore = defineStore({
+  id: 'user',
   state: () => ({
-    counter: 0,
-    name: 'Eduardo'
+    age: 88,
+    name: 'hello world'
   }),
   getters: {
-    doubleCount() {
-      return this.counter * 2
-    },
-    doubleCountPlusOne() {
-      return this.doubleCount * 2 + 1
+    doubleAge(): number {
+      return this.age * 2
     }
   },
   actions: {
-    reset() {
-      this.counter = 0
+    resetAge() {
+      this.age = 0
     }
   }
 })
