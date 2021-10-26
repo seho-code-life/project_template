@@ -81,9 +81,7 @@ export default defineConfig({
     vue(),
     Pages({
       exclude: ['**/components/*.vue'],
-      importMode(path) {
-        return 'async'
-      }
+      importMode: 'async'
     }),
     Layouts(),
     viteMockServe({

@@ -94,14 +94,14 @@ jetbrains 的表现一致，还可以得到更完善 vue3 的支持，甚至非�
 
 [下载 volar 地址](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 
-此模板对于 vscode 有天然的支持，如果你使用 vscode，就能使用模板自带的 vscode 配置，比如说保存自动 lint&fix&prettier 或者其他有意思的功能。
+此模板对于 vscode 有天然的支持，如果你使用 vscode，就能使用模板自带的 vscode 配置，比如说保存自动 fix&prettier 或者其他有意思的功能。
 
 1. 有那么一点智能的代码模板 🐶
 
 模板中自带了若干个 vscode 的 code-snippets，snippets 将会持续更新，它和模板深度贴合，可以帮助你摆脱繁琐的开发。下面就一一描述几个 snippets 的作用:
 
 - model-init-type
-  > 初始化@types/model/api 的提示工具，自动声明命名空间以及导出
+  > 初始化typings/model/api 的提示工具，自动声明命名空间以及导出
 
 <img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/cd983ea7-89a9-42f5-ab95-019190a805e8.gif"/>
 
@@ -179,6 +179,43 @@ const date = ref(dayjs().format('YYYY-MM-DD'))
 ['vue', 'vue-router', '@vueuse/core', 'pinia']
 ```
 
+## 基于文件系统的路由和布局
+如果你开发过nuxt程序的话，那么你应该会对里面的路由设计非常感兴趣，没有路由声明文件，也没有布局引入代码，而模板中自带了这2种功能，得益于下面2个插件:
+
+1. vite-plugin-pages
+2. vite-plugin-vue-layouts
+
+通过插件编译生成的路由信息
+layouts 插件替换页面信息并且追加children
+将会直接交给vue-router
+
+```js
+import { createRouter, createWebHashHistory } from 'vue-router'
+import { setupLayouts } from 'virtual:generated-layouts'
+import generatedRoutes from 'virtual:generated-pages'
+
+const routerHashHistory = createWebHashHistory()
+const routes = setupLayouts(generatedRoutes)
+const Router = createRouter({
+  history: routerHashHistory,
+  routes
+})
+
+export default Router
+
+```
+
+我们则可以在页面中这样指定layout和路由其他信息
+
+```html
+<route lang="yaml">
+meta:
+  layout: default
+  bgColor: yellow
+</route>
+```
+
+
 ## 开发指南
 
 这一块根据自身团队成员的习惯会逐步调整，所以这里的介绍会经常更改。
@@ -189,9 +226,9 @@ const date = ref(dayjs().format('YYYY-MM-DD'))
 
 ### 类型
 
-src/@types
+/typings
 
-像大部分工程一样，把能抽离的 type 都尽量都抽离到了@types 这一层，这一层也暂时根据需求划分了以下几个内容:
+像大部分工程一样，把能抽离的 type 都尽量都抽离到了typings 这一层，这一层也暂时根据需求划分了以下几个内容:
 
 1. controller
 2. model
@@ -255,8 +292,8 @@ export default class UserApiModel {
 }
 ```
 
-useRequest 是我们自定义实现的 hook 函数，我们通过这个 hook 可以发起请求，那么你可以看到在这个类中定义了 login 这个方法，入参类型就是 TUserModel.ReqLogin, 返回类
-型就是 TUserModel.ResLogin，这个类型都是我们在@types 定义的。
+useRequest 是我们自定义实现的 [hook 函数](https://github.com/seho-code-life/project_template/tree/vue3-vite2-ts-template(dev)/src/hook)，我们通过这个 hook 可以发起请求，那么你可以看到在这个类中定义了 login 这个方法，入参类型就是 TUserModel.ReqLogin, 返回类
+型就是 TUserModel.ResLogin，这个类型都是我们在typings 定义的。
 
 再比如说我们搭配 kurimudb 做了缓存的模块化，最常用的缓存插件也预装好了，我们可以在 model 里面去写这样一段代码：
 
@@ -340,10 +377,10 @@ transform(): { text: string; value: string }[] {
 
 ### 视图（.vue）
 
-以 vue 来举例，我们如何在视图优雅的调用 controller？并且如何使用@types 定义的类型来巩固我们的组件？
+以 vue 来举例，我们如何在视图优雅的调用 controller？并且如何使用typings 定义的类型来巩固我们的组件？
 
 ```ts
-import TUserApiModel from '../../@types/model/api/user'
+import TUserApiModel from '../../../typings/model/api/user'
 
 const login = async (params: TUserModel.ReqLogin) => {
   await userController.login(params)
