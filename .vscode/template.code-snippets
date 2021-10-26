@@ -74,9 +74,7 @@
       "<template>",
       "  <div class=\"\">$0</div>",
       "</template>",
-      "<script lang=\"ts\" setup>",
-      "import { ref } from '@vue/reactivity';",
-      "</script>",
+      "<script lang=\"ts\" setup>$1</script>",
       "<style lang=\"scss\" scoped></style>",
       ""
     ],
