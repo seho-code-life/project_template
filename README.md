@@ -1,11 +1,11 @@
 # vue3-vite2-ts-template
 
-- [x] 无需引入直接使用组件/函数 [详情](#组件/函数自动按需导入)
+- [x] 无需引入直接使用组件/函数 [详情](#组件函数自动按需导入)
 - [x] 支持[Windicss](https://cn.windicss.org/)
 - [x] 代码提交前的 lint-stage+husky 校验和美化代码, 多人协作风格统一
 - [x] 适合中小项目的 typescipt 的 mvc 风格架构
 - [x] vite/rollup 打包优化（gzip,legacy 兼容）
-- [x] vscode [代码片段/优化](#vscode开发小指南)
+- [x] vscode [代码片段/优化](#vscode-开发小指南)
 - [x] 预设 Storage, Cookie TS 版本的模块化方案
 - [x] 预设 Eslint 以及 Editorconfig
 - [x] 预设 Pinia 状态管理的模块化以及类型声明
