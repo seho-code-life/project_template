@@ -4,7 +4,7 @@
   "printWidth": 160,
   "tabWidth": 2,
   "tabs": false,
-  "semi": true,
+  "semi": false,
   "quoteProps": "as-needed",
   "bracketSpacing": true,
   "jsxBracketSameLine": true,
