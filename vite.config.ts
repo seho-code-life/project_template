@@ -25,13 +25,6 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, 'src/assets')
     }
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "~/assets/styles/app.scss";'
-      }
-    }
-  },
   build: {
     target: 'es2015',
     rollupOptions: {
