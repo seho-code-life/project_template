@@ -1,5 +1,7 @@
 <template>
-  <div class="index-box">hello, world</div>
+  <div class="index-box">
+    <hello-world></hello-world>
+  </div>
 </template>
 <script lang="ts" setup>
 
@@ -12,7 +14,6 @@
   font-weight: bold;
   font-size: 13px;
 }
-
 .date {
   font-size: 8px;
   color: red;

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
@@ -10,12 +11,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "typeRoots": ["./src/@types"],
-    "types": ["vite/client"],
-    "baseUrl": "src",
     "noImplicitAny": true,
-    "noImplicitThis": true
+    "noImplicitThis": true,
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["dist", "node_modules"]
 }
