@@ -11,6 +11,8 @@ const date = ref(dayjs().format('YYYY-MM-DD'))
 const userStore = useUserStore()
 userStore.resetAge()
 console.log(userStore.$state)
+
+const age = ref<numbe>(1)
 </script>
 <style lang="scss" scoped>
 .component {
