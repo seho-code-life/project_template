@@ -5,7 +5,14 @@ export default class ListController {
   constructor() {
     this.apiModel = new ListApiModel()
   }
-  addList(params: TListApiModel.ReqAddList) {
-    return this.apiModel.addList(params)
+  /**
+   * @name 新增列表项
+   * @param {TListApiModel.ReqCreateList} params
+   * @memberof ListController
+   * @link https://api-doc.zhigui.com/project/57/interface/api/1304
+   * @return {*}
+   */
+  createList(params: TListApiModel.ReqCreateList) {
+    return this.apiModel.createList(params)
   }
 }
