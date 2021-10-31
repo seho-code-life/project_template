@@ -38,6 +38,7 @@ const notify = (message: string) => message
 const callBackByErrorCode: { [key: number]: (res: AxiosError) => void } = {
   401: (res: AxiosError) => {
     // ### 状态码回调
+    console.log(res)
   }
 }
 

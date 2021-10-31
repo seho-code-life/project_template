@@ -9,10 +9,11 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   extends: [
-    'plugin:vue/essential',
     'eslint:recommended',
+    'plugin:vue/vue3-recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended' // 确保在最后一个 屏蔽了eslint格式上的校验（避免和prettier冲突）， extends引用顺序和优先级有关，所以必须最后一个
+    'plugin:prettier/recommended'
   ],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 'off',

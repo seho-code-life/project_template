@@ -16,7 +16,7 @@
     "serve": "vite preview"
   },
   "lint-staged": {
-    "*.{vue,ts,tsx,js,jsx,json,markdown}": [
+    "*.{vue,ts,tsx,js,jsx,json}": [
       "prettier --write",
       "eslint --fix",
       "git add"
