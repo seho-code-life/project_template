@@ -29,7 +29,7 @@ node >= 14.13.1
 | 命令       | 含义                                                    |
 | ---------- | ------------------------------------------------------- |
 | dev        | 快速启动本地开发服务器                                  |
-| lint       | 带有--fix 的 eslint/tsc 校验                                |
+| lint       | 带有--fix 的 eslint/tsc 校验                            |
 | prettier   | eslint-prettier 的美化代码命令                          |
 | prepare    | npm install 自动执行的 husky 安装命令（不使用的请忽略） |
 | lint-stage | 对 git 暂存区的文件进行操作，源于 lint-stage 插件       |
@@ -80,7 +80,8 @@ Tool 是使用 TS 开发的，如果你感兴趣可以提 pr，这是[Tool 的�
 
 旧版本的 husky 和新版还是有很多不一样的，所以如果你以前用过 husky 那么你要在代码提交这里做更多逻辑的话，可以去看看最新的文档。
 
-模板中只拦截了 pre_commit 这个钩子，目标就是在 pre_commit 的时候对代码进行 lint 和自动修复以及美化，而且仅要对暂存区的文件 lint，所以使用了 lint-staged。这个组合太常见了，有需求的开发者可以再这个上层定义一些有趣的功能提 pr。
+模板中只拦截了 pre_commit 这个钩子，目标就是在 pre_commit 的时候对代码进行 lint 和自动修复以及美化，而且仅要对暂存区的文件 lint，所以使用了 lint-staged。这个组
+合太常见了，有需求的开发者可以再这个上层定义一些有趣的功能提 pr。
 
 还有一个需求是校验 git commit message 的规范，但是对于小团队来讲，校验这个规范没有太大必要，也暂时不会对团队带来好处，所以爱鼓捣的可以去鼓捣哈。
 
@@ -204,8 +205,11 @@ export default Router
 
 我们则可以在页面中这样指定 layout 和路由其他信息
 
-```html
-<route lang="yaml">meta: layout: default bgColor: yellow</route>
+```
+<route lang="yaml">
+  meta: layout: default
+  bgColor: yellow
+</route>
 ```
 
 ## 开发指南
@@ -294,14 +298,14 @@ useRequest 是我们自定义实现的 [hook 函数](<https://github.com/seho-co
 
 ```ts
 import { Models } from 'kurimudb'
-import { LocalStorageDriver } from 'kurimudb-driver-localstorage'
-import { CookieDriver } from 'kurimudb-driver-cookie'
+import { localStorageDriverFactory } from 'kurimudb-driver-localstorage'
+import { cookieDriverFactory } from 'kurimudb-driver-cookie'
 
 export class UserLocalStorage extends Models.keyValue {
   constructor() {
     super({
       name: 'user',
-      driver: LocalStorageDriver
+      driver: localStorageDriverFactory
     })
   }
 }
@@ -310,7 +314,7 @@ export class UserCookie extends Models.keyValue {
   constructor() {
     super({
       name: 'user',
-      driver: CookieDriver
+      driver: cookieDriverFactory
     })
   }
 }
