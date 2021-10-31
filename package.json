@@ -18,13 +18,13 @@
     "serve": "vite preview"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
+    "*.{ts,tsx}": [
       "prettier --write",
       "eslint --fix",
       "tsc --noEmit --pretty false --skipLibCheck",
       "git add"
     ],
-    "*.{json,js}": [
+    "*.{json,js,jsx}": [
       "prettier --write",
       "eslint --fix",
       "git add"
