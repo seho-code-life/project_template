@@ -1,13 +1,16 @@
 {
-  "version": "1.1.4",
+  "version": "0.0.0",
   "name": "project-template",
   "scripts": {
     "dev": "vite",
     "dev:test": "vite --mode test",
     "dev:prod": "vite --mode prod",
-    "build": "vite build",
-    "build:test": "vite build --mode test",
-    "build:prod": "vite build --mode prod",
+    "lint": "npm run lint:typescript",
+    "lint:typescript": "tsc --noEmit --pretty false --skipLibCheck && vue-tsc --noEmit --skipLibCheck",
+    "build": "npm run lint && vite build",
+    "build:test": "npm run lint && vite build --mode test",
+    "build:prod": "npm run lint && vite build --mode prod",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "serve": "vite preview"
   },
   "dependencies": {
