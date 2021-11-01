@@ -6,8 +6,8 @@
     "dev:test": "vite --mode test",
     "dev:prod": "vite --mode prod",
     "build": "vite build",
-    "build:test": "npm run lint && vite build --mode test",
-    "build:prod": "npm run lint && vite build --mode prod",
+    "build:test": "vite build --mode test",
+    "build:prod": "vite build --mode prod",
     "serve": "vite preview"
   },
   "dependencies": {
