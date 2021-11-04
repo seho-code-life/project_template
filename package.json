@@ -6,7 +6,7 @@
     "dev:test": "vite --mode test",
     "dev:prod": "vite --mode prod",
     "lint": "npm run lint:typescript",
-    "lint:typescript": "tsc --noEmit --pretty false --skipLibCheck && vue-tsc --noEmit --skipLibCheck",
+    "lint:typescript": "concurrently \"tsc --noEmit --pretty false --skipLibCheck\" \"npx vue-tsc --noEmit --skipLibCheck\"",
     "build": "npm run lint && vite build",
     "build:test": "npm run lint && vite build --mode test",
     "build:prod": "npm run lint && vite build --mode prod",
