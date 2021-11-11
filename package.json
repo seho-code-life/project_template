@@ -7,7 +7,7 @@
     "dev:prod": "vite --mode prod",
     "lint": "concurrently \"npm:lint:eslint\" \"npm:lint:typescript\"",
     "lint:eslint": "eslint 'src/**/*' --fix",
-    "lint:typescript": "concurrently \"tsc --noEmit --pretty false --skipLibCheck\" \"npx vue-tsc --noEmit --skipLibCheck\"",
+    "lint:typescript": "concurrently \"tsc -p tsconfig.json --noEmit --pretty --skipLibCheck\" \"npx vue-tsc --noEmit --skipLibCheck\"",
     "prettier": "prettier --write '**/*.{vue,jsx,tsx,js,ts,json,md}'",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
@@ -21,7 +21,7 @@
     "*.{ts,tsx}": [
       "prettier --write",
       "eslint --fix",
-      "tsc --noEmit --pretty false --skipLibCheck",
+      "tsc -p tsconfig.json --noEmit --pretty --skipLibCheck",
       "git add"
     ],
     "*.{json,js,jsx}": [
@@ -32,7 +32,7 @@
     "*.vue": [
       "prettier --write",
       "eslint --fix",
-      "vue-tsc --project tsconfig.json --noEmit --skipLibCheck",
+      "vue-tsc -p tsconfig.json --noEmit --skipLibCheck",
       "git add"
     ]
   },
