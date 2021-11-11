@@ -32,7 +32,7 @@
     "*.vue": [
       "prettier --write",
       "eslint --fix",
-      "vue-tsc --noEmit --skipLibCheck",
+      "vue-tsc --project tsconfig.json --noEmit --skipLibCheck",
       "git add"
     ]
   },
@@ -83,7 +83,7 @@
     "vite-plugin-style-import": "^1.2.1",
     "vite-plugin-vue-layouts": "^0.4.1",
     "vite-plugin-windicss": "^1.4.12",
-    "vue-tsc": "^0.28.10",
+    "vue-tsc": "^0.29.3",
     "windicss": "^3.1.9"
   }
 }
