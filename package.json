@@ -17,25 +17,6 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "serve": "vite preview"
   },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "tsc -p tsconfig.json --noEmit --pretty --skipLibCheck",
-      "git add"
-    ],
-    "*.{json,js,jsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.vue": [
-      "prettier --write",
-      "eslint --fix",
-      "vue-tsc -p tsconfig.json --noEmit --skipLibCheck",
-      "git add"
-    ]
-  },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
     "@vueuse/core": "^6.4.1",
@@ -70,7 +51,7 @@
     "husky": "^7.0.1",
     "jest": "^27.3.1",
     "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.1",
     "sass": "^1.38.0",
     "ts-jest": "^27.0.7",
     "typescript": "^4.3.5",

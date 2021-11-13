@@ -3,7 +3,9 @@
     <hello-world></hello-world>
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const n = ref<number>(1)
+</script>
 <style lang="scss" scoped>
 .index-box {
   text-align: center;
