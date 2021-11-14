@@ -1,85 +1,109 @@
-import { defineConfig } from 'vite'
-import path from 'path'
-import vue from '@vitejs/plugin-vue'
-import viteCompression from 'vite-plugin-compression'
-import ViteComponents from 'unplugin-vue-components/vite'
-import WindiCSS from 'vite-plugin-windicss'
-import { AntDesignVueResolver, ElementPlusResolver, VantResolver } from 'unplugin-vue-components/resolvers'
-import AutoImport from 'unplugin-auto-import/vite'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import legacy from '@vitejs/plugin-legacy'
-import styleImport from 'vite-plugin-style-import'
-import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
-import { viteMockServe } from 'vite-plugin-mock'
+import { defineConfig } from "vite";
+import path from "path";
+import vue from "@vitejs/plugin-vue";
+import viteCompression from "vite-plugin-compression";
+import ViteComponents from "unplugin-vue-components/vite";
+import WindiCSS from "vite-plugin-windicss";
+import {
+  AntDesignVueResolver,
+  ElementPlusResolver,
+  VantResolver,
+} from "unplugin-vue-components/resolvers";
+import AutoImport from "unplugin-auto-import/vite";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import legacy from "@vitejs/plugin-legacy";
+import styleImport from "vite-plugin-style-import";
+import Pages from "vite-plugin-pages";
+import Layouts from "vite-plugin-vue-layouts";
+import { viteMockServe } from "vite-plugin-mock";
 
 export default defineConfig({
   server: {
     port: 8990,
-    host: '0.0.0.0',
-    open: true
+    host: "0.0.0.0",
+    open: true,
   },
   resolve: {
     alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`,
-      '@assets': path.resolve(__dirname, 'src/assets')
-    }
+      "~/": `${path.resolve(__dirname, "src")}/`,
+      "@assets": path.resolve(__dirname, "src/assets"),
+    },
   },
   build: {
-    target: 'es2015',
+    target: "es2015",
     rollupOptions: {
       output: {
         // 配置额外的入口
         manualChunks: {
-          antdv: ['ant-design-vue']
-        }
-      }
+          antdv: ["ant-design-vue"],
+          elementPlus: ["element-plus"],
+          vant: ["vant"],
+        },
+      },
     },
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
-      }
-    }
+        drop_debugger: true,
+      },
+    },
   },
   plugins: [
     WindiCSS(),
     legacy({
-      targets: ['defaults', 'not IE 11']
+      targets: ["defaults", "not IE 11"],
     }),
     viteCompression({
       verbose: true,
-      algorithm: 'gzip',
-      threshold: 10240
+      algorithm: "gzip",
+      threshold: 10240,
     }),
     styleImport({
       libs: [
         {
-          libraryName: 'ant-design-vue',
+          libraryName: "ant-design-vue",
           esModule: true,
           resolveStyle: (name) => {
-            return `ant-design-vue/es/${name}/style/index`
+            return `ant-design-vue/es/${name}/style/index`;
+          },
+        },
+        {
+          libraryName: "vant",
+          esModule: true,
+          resolveStyle: (name) => {
+            return `vant/es/${name}/style`;
+          },
+        },
+        {
+          libraryName: "element-plus",
+          base: "element-plus/lib/theme-chalk/base.css",
+          resolveStyle: (name) => {
+            return `element-plus/lib/theme-chalk/${name}.css`;
           }
-        }
-      ]
+        },
+      ],
     }),
     ViteComponents({
-      resolvers: [AntDesignVueResolver(), ElementPlusResolver(), VantResolver()],
-      dts: 'src/components.d.ts'
+      resolvers: [
+        AntDesignVueResolver(),
+        ElementPlusResolver(),
+        VantResolver(),
+      ],
+      dts: "src/components.d.ts",
     }),
     AutoImport({
-      imports: ['vue', 'vue-router', '@vueuse/core', 'pinia'],
-      dts: 'src/auto-imports.d.ts'
+      imports: ["vue", "vue-router", "@vueuse/core", "pinia"],
+      dts: "src/auto-imports.d.ts",
     }),
     vue(),
     Pages({
-      exclude: ['**/components/*.vue'],
-      importMode: 'async'
+      exclude: ["**/components/*.vue"],
+      importMode: "async",
     }),
     Layouts(),
     viteMockServe({
-      localEnabled: true
+      localEnabled: true,
     }),
-    vueJsx()
-  ]
-})
+    vueJsx(),
+  ],
+});

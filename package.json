@@ -14,9 +14,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@ant-design/icons-vue": "^6.0.1",
     "@vueuse/core": "^6.4.1",
-    "ant-design-vue": "^2.2.8",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
     "kurimudb": "5.0.2",
