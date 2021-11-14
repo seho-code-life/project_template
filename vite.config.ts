@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import viteCompression from 'vite-plugin-compression'
 import ViteComponents from 'unplugin-vue-components/vite'
 import WindiCSS from 'vite-plugin-windicss'
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import { AntDesignVueResolver, ElementPlusResolver, VantResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
@@ -64,7 +64,7 @@ export default defineConfig({
       ]
     }),
     ViteComponents({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver(), ElementPlusResolver(), VantResolver()],
       dts: 'src/components.d.ts'
     }),
     AutoImport({
