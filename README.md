@@ -1,17 +1,13 @@
 # rollup-typescript-package
 
 - [x] 基础的校验机制，保证代码美观符合生产环境
-- [x] 自带 babel,rollup,eslint 等配置，开发 lib 直接就能上手
-- [x] 提供了 rollup 并行打包,多模块输出等功能
+- [x] 使用[unbuild](https://github.com/unjs/unbuild)进行打包
 
 ## 命令
 
-| 命令      | 含义                        |
-| --------- | --------------------------- |
-| build     | 并行打包所有类型的 lib      |
-| build:esm | 打包 esmodule 版本的 lib    |
-| build:umd | 打包 umd 版本的 lib         |
-| build:min | 打包压缩版的 umd 版本的 lib |
+| 命令  | 含义                   |
+| ----- | ---------------------- |
+| build | 并行打包所有类型的 lib |
 
 ## 技术栈：
 
