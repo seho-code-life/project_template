@@ -8,7 +8,7 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
-import styleImport from 'vite-plugin-style-import'
+import styleImport, { AndDesignVueResolve, VantResolve, ElementPlusResolve } from 'vite-plugin-style-import'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 import { viteMockServe } from 'vite-plugin-mock'
@@ -23,6 +23,13 @@ export default defineConfig({
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
       '@assets': path.resolve(__dirname, 'src/assets')
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
     }
   },
   build: {
@@ -53,18 +60,10 @@ export default defineConfig({
       threshold: 10240
     }),
     styleImport({
-      libs: [
-        {
-          libraryName: 'ant-design-vue',
-          esModule: true,
-          resolveStyle: (name) => {
-            return `ant-design-vue/es/${name}/style/index`
-          }
-        }
-      ]
+      resolves: [AndDesignVueResolve(), VantResolve(), ElementPlusResolve()]
     }),
     ViteComponents({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver({ importStyle: 'less' })],
       dts: 'src/components.d.ts'
     }),
     AutoImport({
