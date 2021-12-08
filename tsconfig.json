@@ -15,8 +15,8 @@
     "noImplicitThis": true,
     "paths": {
       "~/*": ["src/*"]
-    }
+    },
+    "types": ["vite/client", "vite-plugin-pages/client", "vite-plugin-vue-layouts/client", "jest"]
   },
-  "exclude": ["dist", "node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "src/components.d.ts", "src/auto-imports.d.ts"]
+  "exclude": ["dist", "node_modules"]
 }
