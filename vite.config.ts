@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import viteCompression from 'vite-plugin-compression'
 import ViteComponents from 'unplugin-vue-components/vite'
 import WindiCSS from 'vite-plugin-windicss'
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import { AntDesignVueResolver, VantResolver, ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
@@ -34,14 +34,6 @@ export default defineConfig({
   },
   build: {
     target: 'es2015',
-    rollupOptions: {
-      output: {
-        // 配置额外的入口
-        manualChunks: {
-          antdv: ['ant-design-vue']
-        }
-      }
-    },
     terserOptions: {
       compress: {
         drop_console: true,
@@ -63,7 +55,7 @@ export default defineConfig({
       resolves: [AndDesignVueResolve(), VantResolve(), ElementPlusResolve()]
     }),
     ViteComponents({
-      resolvers: [AntDesignVueResolver({ importStyle: 'less' })],
+      resolvers: [AntDesignVueResolver({ importStyle: 'less' }), VantResolver(), ElementPlusResolver()],
       dts: 'src/components.d.ts'
     }),
     AutoImport({
