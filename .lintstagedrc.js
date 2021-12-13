@@ -10,6 +10,5 @@ const generateTSConfig = (stagedFilenames) => {
 
 module.exports = {
   '*.{ts,tsx}': ['prettier --write', 'eslint --fix', (fileName) => generateTSConfig(fileName)('tsc')],
-  '*.vue': ['prettier --write', 'eslint --fix', (fileName) => generateTSConfig(fileName)('vue-tsc')],
   '*.{json,js,jsx}': ['prettier --write', 'eslint --fix']
 }

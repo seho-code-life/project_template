@@ -65,19 +65,5 @@
       ""
     ],
     "description": "enjoy-根据model名称创建一个默认的类型声明文件并且导出"
-  },
-  // 创建vue组件模板
-  "enjoy-init-vue3-ts-scss": {
-    "scope": "vue",
-    "prefix": "vue-init",
-    "body": [
-      "<template>",
-      "  <div class=\"\">$0</div>",
-      "</template>",
-      "<script lang=\"ts\" setup>$1</script>",
-      "<style lang=\"scss\" scoped></style>",
-      ""
-    ],
-    "description": "enjoy-创建vue3-ts-scss初始化模板"
   }
 }
