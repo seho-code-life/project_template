@@ -65,5 +65,23 @@
       ""
     ],
     "description": "enjoy-根据model名称创建一个默认的类型声明文件并且导出"
+  },
+  // 创建react组件
+  "enjoy-init-react-component": {
+    "prefix": "react-init",
+    "body": [
+      "import { FC, useState } from 'react'",
+      "import './index.less'",
+      "",
+      "interface Props {${2}}",
+      "",
+      "const Main: FC<Props> = (props) => {",
+      "  return <div className=\"${1}-container\"></div>",
+      "}",
+      "",
+      "export default Main",
+      ""
+    ],
+    "description": "enjoy-init-react-component"
   }
 }
