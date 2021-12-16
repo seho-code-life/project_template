@@ -16,7 +16,7 @@
     "paths": {
       "~/*": ["src/*"]
     },
-    "types": ["jest"]
+    "types": ["vite/client", "jest"]
   },
   "exclude": ["dist", "node_modules"]
 }
