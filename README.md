@@ -1,6 +1,5 @@
-# vue3-vite2-ts-template
+# react-vite2-ts-template
 
-- [x] 无需引入直接使用组件/函数 [详情](#组件函数自动按需导入)
 - [x] 支持[Windicss](https://cn.windicss.org/)
 - [x] 代码提交前的 lint-stage+husky 校验和美化代码, 多人协作风格统一
 - [x] 适合中小项目的 typescipt 的 mvc 风格架构
@@ -8,13 +7,9 @@
 - [x] vscode [代码片段/优化](#vscode-开发小指南)
 - [x] 预设 Storage, Cookie TS 版本的模块化方案
 - [x] 预设 Eslint 以及 Editorconfig
-- [x] 预设 Pinia 状态管理
-- [x] 预设 开发环境的 [vite-plugin-mock](vite-plugin-mock)
-- [x] 预设 自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
 - [x] 预设 [TS-Jest](https://github.com/kulshekhar/ts-jest) 编写测试用例
 - [x] 可以与 Yapi [无缝结合](https://www.yinzhuoei.com/index.php/archives/596/)
-- [x] 与 UI 框架不耦合，可以使用 antdv,element,vant 等
-- [x] 自带开发常用依赖，antdv, axios, dayjs, querystring...
+- [x] 自带开发常用依赖，antd, axios, dayjs, querystring...
 - [ ] SSR/CSR 优化
 - [ ] 项目文档工具
 
@@ -44,13 +39,6 @@ node >= 14.13.1
 | dev:prod   | 快速启动本地开发服务器(prod 环境) |
 | build:test | 打包(test 环境)                   |
 | build:prod | 打包(prod 环境)                   |
-
-## 技术栈：
-
-1. [vue3](https://vue3js.cn/)
-2. [vueRouter4](https://next.router.vuejs.org/guide/)
-3. pinia
-4. typescript
 
 ## 命令行 🔧
 
@@ -89,11 +77,6 @@ Tool 是使用 TS 开发的，如果你感兴趣可以提 pr，这是[Tool 的�
 
 ## vscode 开发小指南
 
-推荐使用 Volar 插件进行开发，如果你的 IDE 是 Jetbrains 系列的，那么你可能不太需要这个插件，如果你是 vscode 推荐使用 volar。使用 volar，不仅可以在 vue 开发上和
-jetbrains 的表现一致，还可以得到更完善 vue3 的支持，甚至非常新/在草案的语法糖都能够快速享受到。
-
-[下载 volar 地址](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
-
 此模板对于 vscode 有天然的支持，如果你使用 vscode，就能使用模板自带的 vscode 配置，比如说保存自动 fix&prettier 或者其他有意思的功能。
 
 1. 有那么一点智能的代码模板 🐶
@@ -121,96 +104,10 @@ jetbrains 的表现一致，还可以得到更完善 vue3 的支持，甚至非�
 
 <img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/3f1939a3-6657-44eb-8125-6ac141e7d138.gif">
 
-- vue-init
-  > 初始化 vue 页面/组件
+- react-init
+  > 初始化 react 页面/组件
 
-<img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-86dc45ba-28e8-4734-a880-bbf700b08cf9/3a5e4588-72ec-49f7-8a49-f390b9966bfd.gif"/>
-
-## 组件/函数自动按需导入
-
-一般使用组件的按需导入功能，都会使用 babel-plugin-import 这个插件进行按需分析然后自动引入，但是 vite 中提供给我们了:
-
-1. unplugin-vue-components
-2. unplugin-auto-import
-
-使得我们可以这样在 template 中去描述组件而无需导入
-
-```html
-<a-menu>
-  <a-menu-item></a-menu-item>
-</a-menu>
-```
-
-我们在 components 中的组件，也可以直接去使用它:
-
-```html
-<hello-world></hello-world>
-```
-
-同样的，我们也可以实现函数/库的自动按需导入，比如我们可以直接在 vue 中去写 ref,reactive,toRef 这样的 hook:
-
-```html
-<template>
-  <div class="component">
-    <div class="title text-4xl">hello, world</div>
-    <div class="date">{{ date }}</div>
-  </div>
-</template>
-<script lang="ts" setup>
-  import dayjs from 'dayjs'
-  const date = ref(dayjs().format('YYYY-MM-DD'))
-</script>
-<style lang="scss" scoped>
-  .component {
-    .title {
-    }
-    .date {
-      margin-top: 15px;
-    }
-  }
-</style>
-```
-
-而且自带类型提示，因为 unplugin-auto-import 会在 src 下生成一个 auto-imports 的类型声明文件，自动引入了相关类型。
-
-目前在模板中，支持以下依赖的自动导入：
-
-```js
-;['vue', 'vue-router', '@vueuse/core', 'pinia']
-```
-
-## 基于文件系统的路由和布局
-
-如果你开发过 nuxt 程序的话，那么你应该会对里面的路由设计非常感兴趣，没有路由声明文件，也没有布局引入代码，而模板中自带了这 2 种功能，得益于下面 2 个插件:
-
-1. vite-plugin-pages
-2. vite-plugin-vue-layouts
-
-通过插件编译生成的路由信息 layouts 插件替换页面信息并且追加 children 将会直接交给 vue-router
-
-```js
-import { createRouter, createWebHashHistory } from 'vue-router'
-import { setupLayouts } from 'virtual:generated-layouts'
-import generatedRoutes from 'virtual:generated-pages'
-
-const routerHashHistory = createWebHashHistory()
-const routes = setupLayouts(generatedRoutes)
-const Router = createRouter({
-  history: routerHashHistory,
-  routes
-})
-
-export default Router
-```
-
-我们则可以在页面中这样指定 layout 和路由其他信息
-
-```
-<route lang="yaml">
-  meta: layout: default
-  bgColor: yellow
-</route>
-```
+<img width="70%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-c7e81452-9d28-4486-bedc-5dbf7c8386a5/2426e2aa-c28b-4a17-a483-c5bb3f5c1d7b.gif"/>
 
 ## 开发指南
 
@@ -288,7 +185,7 @@ export default class UserApiModel {
 }
 ```
 
-useRequest 是我们自定义实现的 [hook 函数](<https://github.com/seho-code-life/project_template/tree/vue3-vite2-ts-template(dev)/src/hook>)，我们通过这个 hook 可
+useRequest 是我们自定义实现的 [hook 函数](<https://github.com/seho-code-life/project_template/tree/react-vite2-ts-template(dev)/src/hook>)，我们通过这个 hook 可
 以发起请求，那么你可以看到在这个类中定义了 login 这个方法，入参类型就是 TUserModel.ReqLogin, 返回类型就是 TUserModel.ResLogin，这个类型都是我们在 typings 定义的
 。
 
@@ -372,27 +269,30 @@ transform(): { text: string; value: string }[] {
   }
 ```
 
-### 视图（.vue）
+### 视图（.tsx)
 
-以 vue 来举例，我们如何在视图优雅的调用 controller？并且如何使用 typings 定义的类型来巩固我们的组件？
+以 react 来举例，我们如何在视图优雅的调用 controller？并且如何使用 typings 定义的类型来巩固我们的组件？
 
 ```ts
+import { FC, useState } from 'react'
 import TUserApiModel from '../../../typings/model/api/user'
 
-const login = async (params: TUserModel.ReqLogin) => {
-  await userController.login(params)
-}
+const App: FC = (props) => {  
+  const handleClickLogin = async (params: TUserModel.ReqLogin) => {
+    await userController.login(params)
+  }
 
-// 调用login函数
-login({
-  captcha: '',
-  password: '',
-  username: '',
-  uuid: ''
-})
+  return (
+    <div className="component">
+      <div onClick={() => {
+        handleClickLogin(data); // data type must be TUserModel.ReqLogin
+      }}>Login</div>
+    </div>
+  )
+}
 ```
 
-当调用 login 函数时候，提供了与 ReqLogin 不符合的数据结构，是会出现报错的。同理，我们调用 cache 也是一样，需要在 controller 把 cache 封装一层暴露给 vue 即可。
+当调用 login 函数时候，提供了与 ReqLogin 不符合的数据结构，是会出现报错的。同理，我们调用 cache 也是一样，需要在 controller 把 cache 封装一层暴露给 tsx 即可。
 
 ## 环境变量
 
@@ -461,6 +361,5 @@ export default [
 
 1. dayjs
 2. axios
-3. vueuse
 4. kurimudb
 5. query-string
