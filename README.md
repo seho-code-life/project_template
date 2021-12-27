@@ -11,18 +11,17 @@
 - [x] 预设 Pinia 状态管理
 - [x] 预设 开发环境的 [vite-plugin-mock](vite-plugin-mock)
 - [x] 预设 自动装载路由 [vite-plugin-pages](https://www.npmjs.com/package/vite-plugin-pages)
-- [x] 预设 [TS-Jest](https://github.com/kulshekhar/ts-jest) 编写测试用例
+- [x] 预设 [Vitest](https://vitest.dev/guide/) 编写测试用例
 - [x] 可以与 Yapi [无缝结合](https://www.yinzhuoei.com/index.php/archives/596/)
 - [x] 与 UI 框架不耦合，可以使用 antdv,element,vant 等
 - [x] 自带开发常用依赖，antdv, axios, dayjs, querystring...
+- [x] 推荐 PNPM 包管理工具
 - [ ] SSR/CSR 优化
 - [ ] 项目文档工具
 
 ## 环境需求
 
 node >= 14.13.1
-
-> (Jest 的 ESM 利用了 Node 对 ESM 支持，所以需要大于这个版本，如果你不使用 Jest，请忽略)
 
 ## 命令
 
@@ -35,6 +34,7 @@ node >= 14.13.1
 | lint-stage | 对 git 暂存区的文件进行操作，源于 lint-stage 插件       |
 | build      | vite 内置的打包使用 rollup，此模板自带打包优化          |
 | serve      | 本地预览生产环境的程序                                  |
+| test:dev   | 监控测试用例变化并且自动执行 vitest                       |
 
 ### 启动/打包 命令
 

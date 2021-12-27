@@ -41,6 +41,9 @@ export default defineConfig({
       }
     }
   },
+  test: {
+    global: true
+  },
   plugins: [
     WindiCSS(),
     legacy({
@@ -52,14 +55,14 @@ export default defineConfig({
       threshold: 10240
     }),
     styleImport({
-      resolves: [AndDesignVueResolve(), VantResolve(), ElementPlusResolve()]
+      resolves: []
     }),
     ViteComponents({
-      resolvers: [AntDesignVueResolver({ importStyle: 'less' }), VantResolver(), ElementPlusResolver()],
+      resolvers: [],
       dts: 'src/components.d.ts'
     }),
     AutoImport({
-      imports: ['vue', 'vue-router', '@vueuse/core', 'pinia'],
+      imports: ['vue', 'vue-router', '@vueuse/core', 'pinia', 'vitest'],
       dts: 'src/auto-imports.d.ts'
     }),
     vue(),
