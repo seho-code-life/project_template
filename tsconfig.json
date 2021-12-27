@@ -16,7 +16,7 @@
     "paths": {
       "~/*": ["src/*"]
     },
-    "types": ["vite/client", "vite-plugin-pages/client", "vite-plugin-vue-layouts/client", "jest"]
+    "types": ["vite/client", "vite-plugin-pages/client", "vite-plugin-vue-layouts/client", "vitest/global"]
   },
   "exclude": ["dist", "node_modules"]
 }
