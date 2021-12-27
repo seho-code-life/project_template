@@ -29,7 +29,7 @@ specifiers:
   query-string: ^7.0.1
   sass: ^1.38.0
   typescript: ^4.5.2
-  unplugin-auto-import: ^0.4.13
+  unplugin-auto-import: 0.5.4
   unplugin-vue-components: ^0.16.0
   vite: ^2.7.7
   vite-plugin-compression: ^0.3.5
@@ -78,7 +78,7 @@ devDependencies:
   prettier: 2.5.1
   sass: 1.45.1
   typescript: 4.5.4
-  unplugin-auto-import: 0.4.20_@vueuse+core@6.9.2+vite@2.7.7
+  unplugin-auto-import: 0.5.4_@vueuse+core@6.9.2+vite@2.7.7
   unplugin-vue-components: 0.16.0_vite@2.7.7+vue@3.2.26
   vite: 2.7.7_less@4.1.2+sass@1.45.1
   vite-plugin-compression: 0.3.6_vite@2.7.7
@@ -3828,8 +3828,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /unplugin-auto-import/0.4.20_@vueuse+core@6.9.2+vite@2.7.7:
-    resolution: {integrity: sha512-8JdSJXn16cHnWEtEDCY6A5EkewDyUiZjEM07eE70BofEc+cVBmF6wFtxgoHIXEh4A327ZL5Shw6ajatYtDbynw==}
+  /unplugin-auto-import/0.5.4_@vueuse+core@6.9.2+vite@2.7.7:
+    resolution: {integrity: sha512-OxRsAGtg0yAYvJy8Sv5itAPt7erL2ya3gZeKTtpoY1miqOSOhGi8in3qHbov/kMejCxsXhvX39XWlIoMWVNR3Q==}
     engines: {node: '>=14'}
     peerDependencies:
       '@vueuse/core': '*'
