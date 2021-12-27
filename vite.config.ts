@@ -5,7 +5,6 @@ import viteCompression from 'vite-plugin-compression'
 import WindiCSS from 'vite-plugin-windicss'
 import legacy from '@vitejs/plugin-legacy'
 import styleImport, { AntdResolve } from 'vite-plugin-style-import'
-import Pages from 'vite-plugin-pages'
 import { viteMockServe } from 'vite-plugin-mock'
 
 export default defineConfig({
@@ -49,10 +48,6 @@ export default defineConfig({
     }),
     styleImport({
       resolves: [AntdResolve()]
-    }),
-    Pages({
-      exclude: ['**/components/*.vue'],
-      importMode: 'async'
     }),
     viteMockServe({
       localEnabled: true
