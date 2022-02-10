@@ -63,6 +63,11 @@ export default defineConfig({
     }),
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/core', 'pinia', 'vitest'],
+      eslintrc: {
+        enabled: false, // Default `false`
+        filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+        globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+      },
       dts: 'src/auto-imports.d.ts'
     }),
     vue(),

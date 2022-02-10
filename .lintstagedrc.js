@@ -3,8 +3,8 @@ const generateTSConfig = (stagedFilenames) => {
   return (type) => {
     const tsconfig = JSON.parse(fs.readFileSync('tsconfig.json', 'utf8'))
     if (stagedFilenames.length === 0) return ''
-    tsconfig.include = stagedFilenames
-    fs.writeFileSync('tsconfig.lint.json', JSON.stringify(tsconfig))
+    tsconfig.include = tsconfig.include.concat(stagedFilenames)
+    fs.writeFileSync(`tsconfig.${type}.lint.json`, JSON.stringify(tsconfig))
     return `${type} --noEmit --project tsconfig.${type}.lint.json`
   }
 }
